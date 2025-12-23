@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>电影商城 - 首页</title>
+    <!-- Bootstrap5 CSS -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+      .navbar {
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .hero-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 60px 0;
+        margin-bottom: 40px;
+      }
+      .hero-section h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+      .hero-section p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+      }
+      .movie-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: none;
+        border-radius: 10px;
+        overflow: hidden;
+        height: 100%;
+      }
+      .movie-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      }
+      .movie-card img {
+        height: 300px;
+        object-fit: cover;
+      }
+      .movie-card-body {
+        padding: 15px;
+      }
+      .movie-title {
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #333;
+      }
+      .movie-rating {
+        color: #ffc107;
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+      }
+      .movie-price {
+        font-size: 1.3rem;
+        color: #667eea;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      .btn-buy {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        width: 100%;
+      }
+      .btn-buy:hover {
+        background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        color: white;
+      }
+      .category-section {
+        margin-bottom: 50px;
+      }
+      .category-title {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 30px;
+        color: #333;
+        border-bottom: 3px solid #667eea;
+        padding-bottom: 10px;
+      }
+      .footer {
+        background-color: #333;
+        color: white;
+        padding: 40px 0;
+        margin-top: 60px;
+      }
+      .footer-title {
+        font-weight: bold;
+        margin-bottom: 15px;
+      }
+      .footer a {
+        color: #aaa;
+        text-decoration: none;
+      }
+      .footer a:hover {
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="#">
+          <span style="color: #667eea;">🎬 电影商城</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">首页</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">电影分类</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">热映排行</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">购物车</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">登录</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <div class="hero-section">
+      <div class="container">
+        <h1>欢迎来到电影商城</h1>
+        <p>发现最新最热的电影，享受优质的观影体验</p>
+        <button class="btn btn-light btn-lg">立即浏览</button>
+      </div>
+    </div>
+
+    <!-- 主容器 -->
+    <div class="container">
+      <!-- 热映电影 -->
+      <div class="category-section">
+        <h2 class="category-title">🔥 热映电影</h2>
+        <div class="row g-4">
+          <!-- 电影卡片 1 -->
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card movie-card">
+              <img src="https://t.alcy.cc/mp" class="card-img-top" alt="星际穿越">
+              <div class="movie-card-body">
+                <div class="movie-title">星际穿越</div>
+                <div class="movie-rating">⭐⭐⭐⭐⭐ (9.3分)</div>
+                <div class="movie-price">¥68</div>
+                <button class="btn btn-buy btn-sm">加入购物车</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 电影卡片 2 -->
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card movie-card">
+              <img src="https://t.alcy.cc/mp" class="card-img-top" alt="盗梦空间">
+              <div class="movie-card-body">
+                <div class="movie-title">盗梦空间</div>
+                <div class="movie-rating">⭐⭐⭐⭐⭐ (9.2分)</div>
+                <div class="movie-price">¥58</div>
+                <button class="btn btn-buy btn-sm">加入购物车</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 电影卡片 3 -->
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card movie-card">
+              <img src="https://t.alcy.cc/mp" class="card-img-top" alt="肖申克的救赎">
+              <div class="movie-card-body">
+                <div class="movie-title">肖申克的救赎</div>
+                <div class="movie-rating">⭐⭐⭐⭐⭐ (9.4分)</div>
+                <div class="movie-price">¥48</div>
+                <button class="btn btn-buy btn-sm">加入购物车</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 电影卡片 4 -->
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card movie-card">
+              <img src="https://t.alcy.cc/mp" class="card-img-top" alt="霸王别姬">
+              <div class="movie-card-body">
+                <div class="movie-title">霸王别姬</div>
+                <div class="movie-rating">⭐⭐⭐⭐⭐ (9.5分)</div>
+                <div class="movie-price">¥58</div>
+                <button class="btn btn-buy btn-sm">加入购物车</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 最新上映 -->
+      <div class="category-section">
+        <h2 class="category-title">✨ 最新上映</h2>
+        <div class="row g-4">
+          <!-- 电影卡片 5 -->
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card movie-card">
+              <img src="https://t.alcy.cc/mp" class="card-img-top" alt="阿凡达2">
+              <div class="movie-card-body">
+                <div class="movie-title">阿凡达2</div>
+                <div class="movie-rating">⭐⭐⭐⭐ (8.8分)</div>
+                <div class="movie-price">¥78</div>
+                <button class="btn btn-buy btn-sm">加入购物车</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 电影卡片 6 -->
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card movie-card">
+              <img src="https://t.alcy.cc/mp" class="card-img-top" alt="奥本海默">
+              <div class="movie-card-body">
+                <div class="movie-title">奥本海默</div>
+                <div class="movie-rating">⭐⭐⭐⭐ (8.9分)</div>
+                <div class="movie-price">¥68</div>
+                <button class="btn btn-buy btn-sm">加入购物车</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 电影卡片 7 -->
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card movie-card">
+              <img src="https://t.alcy.cc/mp" class="card-img-top" alt="芭比">
+              <div class="movie-card-body">
+                <div class="movie-title">芭比</div>
+                <div class="movie-rating">⭐⭐⭐⭐ (8.5分)</div>
+                <div class="movie-price">¥58</div>
+                <button class="btn btn-buy btn-sm">加入购物车</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 电影卡片 8 -->
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card movie-card">
+              <img src="https://t.alcy.cc/mp" class="card-img-top" alt="毒液3">
+              <div class="movie-card-body">
+                <div class="movie-title">毒液3</div>
+                <div class="movie-rating">⭐⭐⭐⭐ (8.2分)</div>
+                <div class="movie-price">¥68</div>
+                <button class="btn btn-buy btn-sm">加入购物车</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 优惠活动 -->
+      <div class="category-section">
+        <h2 class="category-title">🎁 优惠活动</h2>
+        <div class="row g-4">
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm">
+              <div class="card-body text-center p-4">
+                <h5 class="card-title">新用户优惠</h5>
+                <p class="card-text">首次购买享受8折优惠</p>
+                <button class="btn btn-primary">立即领取</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm">
+              <div class="card-body text-center p-4">
+                <h5 class="card-title">会员专享</h5>
+                <p class="card-text">VIP会员享受全年9折优惠</p>
+                <button class="btn btn-primary">升级会员</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm">
+              <div class="card-body text-center p-4">
+                <h5 class="card-title">满减活动</h5>
+                <p class="card-text">满100元减20元，满200元减50元</p>
+                <button class="btn btn-primary">查看详情</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 mb-4">
+            <div class="footer-title">关于我们</div>
+            <ul class="list-unstyled">
+              <li><a href="#">公司简介</a></li>
+              <li><a href="#">发展历程</a></li>
+              <li><a href="#">联系我们</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 mb-4">
+            <div class="footer-title">帮助中心</div>
+            <ul class="list-unstyled">
+              <li><a href="#">常见问题</a></li>
+              <li><a href="#">购买指南</a></li>
+              <li><a href="#">售后服务</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 mb-4">
+            <div class="footer-title">法律声明</div>
+            <ul class="list-unstyled">
+              <li><a href="#">用户协议</a></li>
+              <li><a href="#">隐私政策</a></li>
+              <li><a href="#">版权声明</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 mb-4">
+            <div class="footer-title">关注我们</div>
+            <ul class="list-unstyled">
+              <li><a href="#">微博</a></li>
+              <li><a href="#">微信</a></li>
+              <li><a href="#">抖音</a></li>
+            </ul>
+          </div>
+        </div>
+        <hr style="border-color: #555;">
+        <div class="text-center">
+          <p>&copy; 2024 电影商城 版权所有 | 京ICP备12345678号</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap5 JS -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
