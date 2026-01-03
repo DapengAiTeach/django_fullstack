@@ -8,14 +8,16 @@
     <title>{% block title %}电影商城{% endblock %}</title>
     <link href="{% static 'bootstrap5/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'fontawesome6/css/all.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
     {% block css %}
     {% endblock %}
 </head>
 
 <body>
+{% include 'home/layout/navbar.html' %}
 {% block main %}
 {% endblock %}
-
+{% include 'home/layout/footer.html' %}
 <script src="{% static 'bootstrap5/js/bootstrap.bundle.min.js' %}"></script>
 {% block js %}
 {% endblock %}
