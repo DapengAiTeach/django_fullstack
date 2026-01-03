@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap 5 插件示例</title>
+    <!-- 使用国内CDN引入Bootstrap 5 -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container my-5">
+        <!-- 模态框按钮 -->
+        <h2 class="text-center text-primary">模态框示例</h2>
+        <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                打开模态框
+            </button>
+        </div>
+
+        <!-- 模态框 -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">模态框标题</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        这是模态框的内容。
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary">保存更改</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 提示框按钮 -->
+        <h2 class="text-center text-primary mt-5">提示框示例</h2>
+        <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" title="这是一个提示框！">
+                鼠标悬停这里
+            </button>
+        </div>
+    </div>
+
+    <!-- 使用Bootstrap 5的脚本 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // 初始化Tooltip插件
+        var tooltipTriggerList = Array.from(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+
+</body>
+
+</html>
