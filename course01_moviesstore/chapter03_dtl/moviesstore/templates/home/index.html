@@ -2,21 +2,592 @@
 {% load static %}
 {% block title %}首页 - 电影商城{% endblock %}
 {% block main %}
-    <!-- 巨幅欢迎区 -->
-    <section class="masthead bg-index text-center py-5">
+<main>
+    <!-- ========== Hero区域 ========== -->
+    <section class="hero-section">
         <div class="container">
-            <h1 class="display-4 fw-bold">电影商城</h1>
-            <p class="lead">你的无限娱乐通行证</p>
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    发现您的下一部<br>
+                    <span class="highlight">必看大片</span>
+                </h1>
+                <p class="hero-subtitle">全球最新影视内容，一站尽享。正版授权，高清体验，尽在电影商城</p>
+                <div class="hero-buttons">
+                    <a href="" class="btn btn-gold btn-premium">
+                        <i class="fas fa-play-circle"></i> 开始浏览
+                    </a>
+                    <a href="{% url 'home:about' %}" class="btn btn-outline-gold btn-premium">
+                        <i class="fas fa-info-circle"></i> 了解更多
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- 简介区 -->
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-md-8 mx-auto text-center">
-                <h2>欢迎来到最好的在线电影商店</h2>
-                <p class="text-muted">最新大片、经典老片、冷门佳片，一站尽收。</p>
+    <!-- ========== 分类导航 ========== -->
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-list-ul"></i> 浏览分类
+            </h2>
+            <div class="category-nav">
+                <button class="category-btn active">
+                    <i class="fas fa-star"></i> 热销推荐
+                </button>
+                <button class="category-btn">
+                    <i class="fas fa-bolt"></i> 动作片
+                </button>
+                <button class="category-btn">
+                    <i class="fas fa-laugh"></i> 喜剧片
+                </button>
+                <button class="category-btn">
+                    <i class="fas fa-heart"></i> 爱情片
+                </button>
+                <button class="category-btn">
+                    <i class="fas fa-robot"></i> 科幻片
+                </button>
+                <button class="category-btn">
+                    <i class="fas fa-ghost"></i> 恐怖片
+                </button>
+                <button class="category-btn">
+                    <i class="fas fa-crown"></i> 经典老片
+                </button>
+                <button class="category-btn">
+                    <i class="fas fa-gem"></i> 冷门佳片
+                </button>
+            </div>
+
+            <!-- 热销电影轮播 -->
+            <div id="hotMoviesCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <!-- 第一页 -->
+                    <div class="carousel-item active">
+                        <div class="row g-4">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="card card-premium">
+                                    <img src="https://wp.upx8.com/api.php" class="card-img-top" alt="电影海报">
+                                    <div class="card-body">
+                                        <h5 class="card-title">星际穿越</h5>
+                                        <p class="card-text">
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star-half-alt" style="color: var(--accent-gold);"></i>
+                                            <span class="ms-2">9.3/10</span>
+                                        </p>
+                                        <p class="card-text"><small>导演：克里斯托弗·诺兰</small></p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="badge">¥29.99</span>
+                                            <a href="" class="btn btn-sm btn-gold">加入购物车</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-3">
+                                <div class="card card-premium">
+                                    <img src="https://wp.upx8.com/api.php" class="card-img-top" alt="电影海报">
+                                    <div class="card-body">
+                                        <h5 class="card-title">盗梦空间</h5>
+                                        <p class="card-text">
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star-half-alt" style="color: var(--accent-gold);"></i>
+                                            <span class="ms-2">9.1/10</span>
+                                        </p>
+                                        <p class="card-text"><small>导演：克里斯托弗·诺兰</small></p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="badge">¥24.99</span>
+                                            <a href="" class="btn btn-sm btn-gold">加入购物车</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-3">
+                                <div class="card card-premium">
+                                    <img src="https://wp.upx8.com/api.php" class="card-img-top" alt="电影海报">
+                                    <div class="card-body">
+                                        <h5 class="card-title">肖申克救赎</h5>
+                                        <p class="card-text">
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <span class="ms-2">9.5/10</span>
+                                        </p>
+                                        <p class="card-text"><small>导演：弗兰克·达拉邦特</small></p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="badge">¥19.99</span>
+                                            <a href="" class="btn btn-sm btn-gold">加入购物车</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-3">
+                                <div class="card card-premium">
+                                    <img src="https://wp.upx8.com/api.php" class="card-img-top" alt="电影海报">
+                                    <div class="card-body">
+                                        <h5 class="card-title">霸王别姬</h5>
+                                        <p class="card-text">
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star-half-alt" style="color: var(--accent-gold);"></i>
+                                            <span class="ms-2">9.4/10</span>
+                                        </p>
+                                        <p class="card-text"><small>导演：陈凯歌</small></p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="badge">¥22.99</span>
+                                            <a href="" class="btn btn-sm btn-gold">加入购物车</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 第二页 -->
+                    <div class="carousel-item">
+                        <div class="row g-4">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="card card-premium">
+                                    <img src="https://wp.upx8.com/api.php?content=动漫" class="card-img-top" alt="电影海报">
+                                    <div class="card-body">
+                                        <h5 class="card-title">阿凡达</h5>
+                                        <p class="card-text">
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <span class="ms-2">8.9/10</span>
+                                        </p>
+                                        <p class="card-text"><small>导演：詹姆斯·卡梅隆</small></p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="badge">¥34.99</span>
+                                            <a href="" class="btn btn-sm btn-gold">加入购物车</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-3">
+                                <div class="card card-premium">
+                                    <img src="https://wp.upx8.com/api.php?content=动漫" class="card-img-top" alt="电影海报">
+                                    <div class="card-body">
+                                        <h5 class="card-title">泰坦尼克号</h5>
+                                        <p class="card-text">
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <span class="ms-2">8.9/10</span>
+                                        </p>
+                                        <p class="card-text"><small>导演：詹姆斯·卡梅隆</small></p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="badge">¥24.99</span>
+                                            <a href="" class="btn btn-sm btn-gold">加入购物车</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-3">
+                                <div class="card card-premium">
+                                    <img src="https://wp.upx8.com/api.php?content=动漫" class="card-img-top" alt="电影海报">
+                                    <div class="card-body">
+                                        <h5 class="card-title">海上钢琴师</h5>
+                                        <p class="card-text">
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star-half-alt" style="color: var(--accent-gold);"></i>
+                                            <span class="ms-2">9.2/10</span>
+                                        </p>
+                                        <p class="card-text"><small>导演：朱塞佩·托纳多雷</small></p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="badge">¥21.99</span>
+                                            <a href="" class="btn btn-sm btn-gold">加入购物车</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-3">
+                                <div class="card card-premium">
+                                    <img src="https://wp.upx8.com/api.php?content=动漫" class="card-img-top" alt="电影海报">
+                                    <div class="card-body">
+                                        <h5 class="card-title">楚门的世界</h5>
+                                        <p class="card-text">
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <i class="fas fa-star" style="color: var(--accent-gold);"></i>
+                                            <span class="ms-2">8.8/10</span>
+                                        </p>
+                                        <p class="card-text"><small>导演：彼得·威尔</small></p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="badge">¥19.99</span>
+                                            <a href="" class="btn btn-sm btn-gold">加入购物车</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 轮播控制 -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#hotMoviesCarousel" data-bs-slide="prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#hotMoviesCarousel" data-bs-slide="next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- ========== 新上架电影 ========== -->
+    <section class="section-padding" style="background-color: rgba(26, 35, 50, 0.3);">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-fire"></i> 新上架电影
+            </h2>
+            <p class="text-muted mb-4">每周更新最新影视内容，精选优质大片供您观赏</p>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-premium">
+                        <div style="position: relative;">
+                            <img src="https://wp.upx8.com/api.php?content=海贼" class="card-img-top" alt="电影海报">
+                            <span class="badge position-absolute top-0 start-0 m-2" style="background-color: #ff4757;">NEW</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">新片1</h5>
+                            <p class="card-text"><small>刚上架</small></p>
+                            <a href="" class="btn btn-gold w-100">了解详情</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-premium">
+                        <div style="position: relative;">
+                            <img src="https://wp.upx8.com/api.php?content=海贼" class="card-img-top" alt="电影海报">
+                            <span class="badge position-absolute top-0 start-0 m-2" style="background-color: #ff4757;">NEW</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">新片2</h5>
+                            <p class="card-text"><small>刚上架</small></p>
+                            <a href="" class="btn btn-gold w-100">了解详情</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-premium">
+                        <div style="position: relative;">
+                            <img src="https://wp.upx8.com/api.php?content=海贼" class="card-img-top" alt="电影海报">
+                            <span class="badge position-absolute top-0 start-0 m-2" style="background-color: #ff4757;">NEW</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">新片3</h5>
+                            <p class="card-text"><small>刚上架</small></p>
+                            <a href="" class="btn btn-gold w-100">了解详情</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-premium">
+                        <div style="position: relative;">
+                            <img src="https://wp.upx8.com/api.php?content=海贼" class="card-img-top" alt="电影海报">
+                            <span class="badge position-absolute top-0 start-0 m-2" style="background-color: #ff4757;">NEW</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">新片4</h5>
+                            <p class="card-text"><small>刚上架</small></p>
+                            <a href="" class="btn btn-gold w-100">了解详情</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 为什么选择我们 ========== -->
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">
+                <i class="fas fa-check-circle"></i> 为什么选择电影商城
+            </h2>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h5>正版授权</h5>
+                        <p>100% 正版电影内容，与全球主要影视制作公司合作，保证版权合法</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-hd"></i>
+                        </div>
+                        <h5>高清体验</h5>
+                        <p>支持 4K 超清播放，杜比影院音效，享受影院级别的视听体验</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-smartphone"></i>
+                        </div>
+                        <h5>多设备支持</h5>
+                        <p>支持电视、电脑、平板、手机等多种设备观看，随时随地享受电影</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h5>快速发货</h5>
+                        <p>购买后即刻发送授权链接，无需等待，立即开启观影之旅</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 用户评价 ========== -->
+    <section class="section-padding" style="background-color: rgba(26, 35, 50, 0.3);">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">
+                <i class="fas fa-quote-left"></i> 用户评价
+            </h2>
+
+            <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row g-4">
+                            <div class="col-md-6 col-lg-4">
+                                <div class="testimonial-card">
+                                    <div class="testimonial-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <p class="testimonial-text">"电影商城的内容真丰富，价格也很合理。买了不少影视剧，都是正版，画质超清，强烈推荐！"</p>
+                                    <p class="testimonial-author">
+                                        <i class="fas fa-user-circle"></i> 李明
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="testimonial-card">
+                                    <div class="testimonial-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <p class="testimonial-text">"界面设计很舒适，导航清晰，找电影很方便。客服响应也很快，有问题立即解决。"</p>
+                                    <p class="testimonial-author">
+                                        <i class="fas fa-user-circle"></i> 王芳
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="testimonial-card">
+                                    <div class="testimonial-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <p class="testimonial-text">"支持多设备播放，这点很贴心。在电视上看大片特别爽，家人都很喜欢。"</p>
+                                    <p class="testimonial-author">
+                                        <i class="fas fa-user-circle"></i> 张军
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <div class="row g-4">
+                            <div class="col-md-6 col-lg-4">
+                                <div class="testimonial-card">
+                                    <div class="testimonial-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <p class="testimonial-text">"会员权益很不错，经常有优惠活动。比起其他平台性价比高很多。"</p>
+                                    <p class="testimonial-author">
+                                        <i class="fas fa-user-circle"></i> 陈红
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="testimonial-card">
+                                    <div class="testimonial-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <p class="testimonial-text">"推荐算法真的不错，经常发现我喜欢的冷门佳片。社区评论也很有参考价值。"</p>
+                                    <p class="testimonial-author">
+                                        <i class="fas fa-user-circle"></i> 周刚
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="testimonial-card">
+                                    <div class="testimonial-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <p class="testimonial-text">"这是我用过最好的电影平台！内容全，体验佳，后期更新也很及时。"</p>
+                                    <p class="testimonial-author">
+                                        <i class="fas fa-user-circle"></i> 刘超
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FAQ 部分 ========== -->
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">
+                <i class="fas fa-question-circle"></i> 常见问题
+            </h2>
+
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item" style="background-color: rgba(26, 35, 50, 0.5); border: 1px solid var(--border-color);">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    <i class="fas fa-question-circle me-2" style="color: var(--accent-gold);"></i> 如何购买电影？
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body" style="background-color: rgba(26, 35, 50, 0.3);">
+                                    选择心仪的电影，点击"加入购物车"，进行支付即可。支付完成后，我们会立即为您发送观影链接和授权码。
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item" style="background-color: rgba(26, 35, 50, 0.5); border: 1px solid var(--border-color);">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    <i class="fas fa-question-circle me-2" style="color: var(--accent-gold);"></i> 支持哪些支付方式？
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body" style="background-color: rgba(26, 35, 50, 0.3);">
+                                    支持支付宝、微信支付、银行卡等多种支付方式，安全快捷。
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item" style="background-color: rgba(26, 35, 50, 0.5); border: 1px solid var(--border-color);">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    <i class="fas fa-question-circle me-2" style="color: var(--accent-gold);"></i> 购买后可以永久观看吗？
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body" style="background-color: rgba(26, 35, 50, 0.3);">
+                                    是的，购买后您将获得该电影的永久观看权，可以随时在线观看或下载。
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item" style="background-color: rgba(26, 35, 50, 0.5); border: 1px solid var(--border-color);">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    <i class="fas fa-question-circle me-2" style="color: var(--accent-gold);"></i> 如何联系客服？
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body" style="background-color: rgba(26, 35, 50, 0.3);">
+                                    可通过邮件 info@moviesstore.com 或电话 +86 123-4567-8900 联系我们，工作时间内会及时回复。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 邮箱订阅 ========== -->
+    <section class="section-padding" style="background: linear-gradient(135deg, #1a2332 0%, #162239 100%); position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; right: -100px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%); border-radius: 50%;"></div>
+        
+        <div class="container" style="position: relative; z-index: 1;">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="section-title text-center mb-3">
+                        <i class="fas fa-envelope"></i> 订阅我们的通讯
+                    </h2>
+                    <p class="text-muted mb-4">获取最新电影上架提醒、独家优惠和VIP权益信息，不错过任何大片</p>
+                    
+                    <form class="d-flex gap-2">
+                        <input type="email" class="form-control" placeholder="请输入您的邮箱地址" style="background-color: rgba(255, 255, 255, 0.1); border: 1px solid var(--border-color); color: var(--text-light);">
+                        <button type="submit" class="btn btn-gold btn-premium">
+                            <i class="fas fa-paper-plane"></i> 订阅
+                        </button>
+                    </form>
+                    
+                    <p class="small text-muted mt-3">我们尊重您的隐私，不会分享您的邮箱地址</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 {% endblock %}
