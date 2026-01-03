@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}首页 - 电影信息{% endblock %}
+
+{% block content %}
+    <h1>电影列表</h1>
+    <ul>
+        {% for movie in movies %}
+            <li>
+                <strong>{{ movie.title }}</strong><br>
+                导演: {{ movie.director }}<br>
+                发布年份: {{ movie.year }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

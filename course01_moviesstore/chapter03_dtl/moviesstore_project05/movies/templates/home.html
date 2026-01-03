@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电影信息</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<nav>
+    <img src="{% static 'images/logo.jpg' %}" alt="Logo" class="logo">
+    <h1>电影列表</h1>
+</nav>
+
+<ul>
+    {% for movie in movies %}
+        <li>
+            <strong>{{ movie.title }}</strong><br>
+            导演: {{ movie.director }}<br>
+            发布年份: {{ movie.year }}
+        </li>
+    {% endfor %}
+</ul>
+
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

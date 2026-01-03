@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap 5 卡片与图标示例</title>
+    <link href="{% static 'bootstrap5/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'fontawesome6/css/all.min.css' %}" rel="stylesheet">
+</head>
+
+<body>
+<div class="container my-5">
+    <h2 class="text-center text-primary">Bootstrap 5 卡片与图标示例</h2>
+
+    <!-- 卡片1 -->
+    <div class="card" style="width: 18rem;">
+        <img src="https://wp.upx8.com/api.php" class="card-img-top" alt="图片">
+        <div class="card-body">
+            <h5 class="card-title"><i class="fa fa-info-circle"></i> 卡片标题</h5>
+            <p class="card-text">这是卡片的内容部分，包含了一些文本。</p>
+            <a href="#" class="btn btn-primary"><i class="fa fa-arrow-right"></i> 点击这里</a>
+        </div>
+        <div class="card-footer text-muted">
+            <i class="fa fa-star"></i> 收藏
+        </div>
+    </div>
+
+</div>
+
+<script src="{% static 'bootstrap5/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
