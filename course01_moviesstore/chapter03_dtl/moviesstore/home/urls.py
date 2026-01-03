@@ -3,5 +3,6 @@ from . import views
 
 app_name = 'home'
 urlpatterns = [
-    path('', views.home, name='home'),  # 首页路由
+    path('', views.home, name='home'),
+    path('about.html/', views.about, name='home'),
 ]

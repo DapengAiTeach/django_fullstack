@@ -1,19 +1,21 @@
 {% extends "home/base.html" %}
 {% load static %}
-
+{% block title %}首页 - 电影商城{% endblock %}
 {% block main %}
-    <div class="container my-5">
-        <h2 class="text-center text-primary">Bootstrap 5 卡片与图标示例</h2>
-        <!-- 卡片1 -->
-        <div class="card" style="width: 18rem;">
-            <img src="https://wp.upx8.com/api.php" class="card-img-top" alt="图片">
-            <div class="card-body">
-                <h5 class="card-title"><i class="fa fa-info-circle"></i> 卡片标题</h5>
-                <p class="card-text">这是卡片的内容部分，包含了一些文本。</p>
-                <a href="#" class="btn btn-primary"><i class="fa fa-arrow-right"></i> 点击这里</a>
-            </div>
-            <div class="card-footer text-muted">
-                <i class="fa fa-star"></i> 收藏
+    <!-- 巨幅欢迎区 -->
+    <section class="masthead bg-index text-center py-5">
+        <div class="container">
+            <h1 class="display-4 fw-bold">电影商城</h1>
+            <p class="lead">你的无限娱乐通行证</p>
+        </div>
+    </section>
+
+    <!-- 简介区 -->
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-8 mx-auto text-center">
+                <h2>欢迎来到最好的在线电影商店</h2>
+                <p class="text-muted">最新大片、经典老片、冷门佳片，一站尽收。</p>
             </div>
         </div>
     </div>
