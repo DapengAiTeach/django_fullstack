@@ -1,0 +1,101 @@
+{% extends "movies/base.html" %}
+{% block title %}电影索引页{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+  <div class="col-lg-4">
+    <div class="card card-tech p-3">
+      <h5 class="mb-3"><i class="fa-solid fa-filter me-2 text-primary"></i>筛选 / 排序</h5>
+      <form method="get" class="vstack gap-3">
+        <div>
+          <label class="form-label text-muted-tech">{{ form.kw.label }}</label>
+          {{ form.kw }}
+        </div>
+
+        <div>
+          <label class="form-label text-muted-tech">{{ form.category.label }}</label>
+          {{ form.category }}
+          <div class="form-text text-muted-tech">
+            高频字段：category 建议 db_index + 复合 indexes
+          </div>
+        </div>
+
+        <div>
+          <label class="form-label text-muted-tech">{{ form.is_active.label }}</label>
+          {{ form.is_active }}
+        </div>
+
+        <div>
+          <label class="form-label text-muted-tech">{{ form.sort.label }}</label>
+          {{ form.sort }}
+          <div class="form-text text-muted-tech">
+            Meta.ordering 默认 -created_at；这里演示切换
+          </div>
+        </div>
+
+        <button class="btn btn-primary w-100">
+          <i class="fa-solid fa-bolt me-2"></i>应用
+        </button>
+      </form>
+    </div>
+
+    <div class="card card-tech p-3 mt-4">
+      <h6 class="mb-2"><i class="fa-solid fa-graduation-cap me-2 text-primary"></i>工程提示</h6>
+      <div class="vstack gap-2">
+        {% for t in tips %}
+          <div class="text-muted-tech">• {{ t }}</div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-8">
+    <div class="card card-tech p-3">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="mb-0"><i class="fa-solid fa-list me-2 text-primary"></i>结果（前50条）</h5>
+        <span class="text-muted-tech small">
+          默认排序：Meta.ordering = -created_at
+        </span>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead>
+            <tr>
+              <th>标题</th>
+              <th>导演</th>
+              <th>分类</th>
+              <th>状态</th>
+              <th>评分</th>
+              <th>创建</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for m in movies %}
+              <tr>
+                <td class="fw-semibold">{{ m.title }}</td>
+                <td>{{ m.director.name }}</td>
+                <td><span class="badge badge-soft">{{ m.category }}</span></td>
+                <td>
+                  {% if m.is_active %}
+                    <span class="badge bg-success">上架</span>
+                  {% else %}
+                    <span class="badge bg-secondary">下架</span>
+                  {% endif %}
+                </td>
+                <td>{{ m.rating }}</td>
+                <td class="text-muted-tech">{{ m.created_at|date:"Y-m-d" }}</td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="6" class="text-center text-muted-tech py-5">暂无数据</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

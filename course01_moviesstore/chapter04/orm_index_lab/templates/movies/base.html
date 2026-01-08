@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>{% block title %}ORM 索引与Meta{% endblock %}</title>
+
+  <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg1:#f6f9ff;
+      --bg2:#eaf1ff;
+      --card:#ffffff;
+      --line:#d9e6ff;
+      --primary:#2563eb;
+      --muted:#5b6b84;
+    }
+    body{
+      background: radial-gradient(1200px 600px at 20% 0%, var(--bg2) 0%, var(--bg1) 55%, #ffffff 100%);
+      color:#0f172a;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+    .navbar-tech{
+      background: rgba(255,255,255,.82);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .card-tech{
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(37, 99, 235, .08);
+    }
+    .text-muted-tech{color:var(--muted)!important;}
+    .footer-tech{
+      margin-top:auto;
+      background: rgba(255,255,255,.82);
+      border-top: 1px solid var(--line);
+    }
+    .badge-soft{
+      background: rgba(37,99,235,.10);
+      border: 1px solid rgba(37,99,235,.18);
+      color:#1e40af;
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-tech">
+  <div class="container">
+    <a class="navbar-brand fw-semibold" href="{% url 'movies:home' %}">
+      <i class="fa-solid fa-database me-2 text-primary"></i>MySQL8 × ORM 索引实验室
+    </a>
+    <div class="ms-auto d-flex gap-2">
+      <a class="btn btn-outline-primary btn-sm" href="{% url 'movies:movie_index' %}">
+        <i class="fa-solid fa-list me-1"></i>电影索引页
+      </a>
+    </div>
+  </div>
+</nav>
+
+<main class="container py-4">
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="footer-tech py-3">
+  <div class="container d-flex justify-content-between align-items-center">
+    <div class="text-muted-tech small">
+      <i class="fa-solid fa-screwdriver-wrench me-1"></i>db_index · unique · indexes · Meta.ordering
+    </div>
+    <div class="small">
+      <span class="text-muted-tech">Made by</span> <span class="badge badge-soft rounded-pill">AI程序员张总</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

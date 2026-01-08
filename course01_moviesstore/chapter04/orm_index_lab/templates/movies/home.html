@@ -1,0 +1,13 @@
+{% extends "movies/base.html" %}
+{% block title %}首页 - ORM 索引{% endblock %}
+{% block content %}
+<div class="card card-tech p-4">
+  <h3 class="mb-2"><i class="fa-solid fa-key me-2 text-primary"></i>索引与Meta：后台系统的底盘</h3>
+  <p class="text-muted-tech mb-3">
+    你会看到：只改模型的索引与Meta配置，列表页体验就能明显提升（尤其是数据量上来之后）。
+  </p>
+  <a class="btn btn-primary" href="{% url 'movies:movie_index' %}">
+    <i class="fa-solid fa-list me-2"></i>进入电影索引页
+  </a>
+</div>
+{% endblock %}
