@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% block title %}实验室 · QuerySet Lab{% endblock %}
+
+{% block content %}
+<div class="row g-3">
+
+  <div class="col-12">
+    <div class="card p-4">
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+        <div>
+          <div class="h5 mb-1">QuerySet 实验室</div>
+          <div class="text-muted small">
+            你在页面上“改条件”，本质是<strong>链式调用</strong>在拼 SQL；点击动作才会触发查询。
+          </div>
+        </div>
+
+        <span class="badge badge-tech">QuerySet repr：{{ qs_repr }}</span>
+      </div>
+
+      <!-- 条件区：只是在构造 QuerySet，不会立即访问 DB -->
+      <form class="row g-2 mt-3" method="get">
+        <div class="col-md-4">
+          <input class="form-control" name="kw" value="{{ kw }}" placeholder="标题包含（filter icontains）">
+        </div>
+        <div class="col-md-3">
+          <input class="form-control" name="min_views" value="{{ min_views }}" placeholder="最小浏览量（views__gte）">
+        </div>
+        <div class="col-md-2 d-flex align-items-center gap-2">
+          <input class="form-check-input" type="checkbox" name="pub" value="1" {% if only_pub %}checked{% endif %}>
+          <span class="text-muted small">仅发布</span>
+        </div>
+        <div class="col-md-3 d-flex align-items-center gap-2">
+          <input class="form-check-input" type="checkbox" name="ex0" value="1" {% if request.GET.ex0 == "1" %}checked{% endif %}>
+          <span class="text-muted small">exclude(views=0)</span>
+        </div>
+
+        <div class="col-12 d-flex flex-wrap gap-2 mt-2">
+          <!-- 动作按钮：这些会触发访问数据库 -->
+          <button class="btn btn-tech btn-sm" name="action" value="preview">
+            <i class="fa-regular fa-eye me-1"></i>预览（迭代触发）
+          </button>
+          <button class="btn btn-tech btn-sm" name="action" value="values">
+            <i class="fa-solid fa-table-list me-1"></i>values()
+          </button>
+          <button class="btn btn-tech btn-sm" name="action" value="values_list">
+            <i class="fa-solid fa-list-ul me-1"></i>values_list()
+          </button>
+          <button class="btn btn-tech btn-sm" name="action" value="distinct_tags">
+            <i class="fa-solid fa-layer-group me-1"></i>distinct()
+          </button>
+          <button class="btn btn-tech btn-sm" name="action" value="exists">
+            <i class="fa-solid fa-circle-check me-1"></i>exists()
+          </button>
+          <button class="btn btn-tech btn-sm" name="action" value="count">
+            <i class="fa-solid fa-hashtag me-1"></i>count()
+          </button>
+        </div>
+
+        <div class="col-12">
+          <div class="text-muted small mt-2">
+            提示：仅仅修改输入框/勾选框是在“构造 QuerySet”（惰性），只有点击上面动作按钮才会<strong>真正查询</strong>。
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 结果区 -->
+  <div class="col-lg-7">
+    <div class="card p-4">
+      <div class="fw-semibold mb-2">执行结果（action={{ action }}）</div>
+
+      {% if action == "exists" or action == "count" %}
+        <div class="display-6">
+          {{ payload }}
+        </div>
+        <div class="text-muted small mt-2">
+          exists() 更快：它通常只查到第一条就返回；count() 会做 COUNT(*)。
+        </div>
+      {% elif action == "distinct_tags" %}
+        <div class="d-flex flex-wrap gap-2">
+          {% for name in payload %}
+            <span class="badge badge-tech">{{ name }}</span>
+          {% empty %}
+            <span class="text-muted">无</span>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="table-responsive">
+          <table class="table table-sm align-middle mb-0">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>内容</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in payload %}
+                <tr>
+                  <td class="text-muted small">{{ forloop.counter }}</td>
+                  <td>
+                    {% if action == "values" %}
+                      <code>{{ row }}</code>
+                    {% elif action == "values_list" %}
+                      <code>{{ row }}</code>
+                    {% else %}
+                      <div class="fw-semibold">{{ row.title }}</div>
+                      <div class="text-muted small">views={{ row.views }} · published={{ row.is_published }}</div>
+                    {% endif %}
+                  </td>
+                </tr>
+              {% empty %}
+                <tr><td colspan="2" class="text-muted text-center py-4">无结果</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- SQL 区：让学生看见“什么时候 hit DB” -->
+  <div class="col-lg-5">
+    <div class="card p-4">
+      <div class="fw-semibold mb-2">最近执行的 SQL（教学用）</div>
+      <div class="text-muted small mb-2">
+        只有当触发“真正访问数据库”的操作时，这里才会出现 SQL。
+      </div>
+
+      {% if sql_logs %}
+        <div class="vstack gap-2">
+          {% for q in sql_logs %}
+            <div class="border rounded p-2" style="border-color: var(--line)!important;">
+              <div class="small"><code>{{ q.sql }}</code></div>
+              <div class="text-muted small mt-1">time={{ q.time }}s</div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="text-muted">暂无 SQL 记录（说明你还没触发查询）。</div>
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+{% endblock %}

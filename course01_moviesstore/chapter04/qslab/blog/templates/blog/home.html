@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}首页 · QuerySet Lab{% endblock %}
+
+{% block content %}
+<div class="row g-3">
+  <div class="col-lg-7">
+    <div class="card p-4">
+      <div class="h4 mb-2">QuerySet 深度理解：最容易误解的 ORM 核心</div>
+      <div class="text-muted mb-3">
+        90% 的 ORM 性能问题，来自对 QuerySet 的误解。我们用“实验室”的方式，让你<strong>看见</strong>数据库何时被访问。
+      </div>
+
+      <div class="d-flex gap-2">
+        <a class="btn btn-tech" href="{% url 'blog:seed' %}">
+          <i class="fa-solid fa-wand-magic-sparkles me-1"></i>先造一批数据
+        </a>
+        <a class="btn btn-tech" href="{% url 'blog:lab' %}">
+          <i class="fa-solid fa-flask me-1"></i>直接进入实验室
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-5">
+    <div class="card p-4">
+      <div class="fw-semibold mb-2">你将掌握</div>
+      <ul class="mb-0 text-muted">
+        <li>QuerySet 为何是惰性执行</li>
+        <li>链式调用如何“拼装 SQL”</li>
+        <li>QuerySet 与 List 的本质差异</li>
+        <li>哪些操作会真正 hit 数据库</li>
+        <li>values / values_list / distinct / exists / count</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

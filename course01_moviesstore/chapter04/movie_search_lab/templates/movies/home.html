@@ -1,0 +1,16 @@
+{% extends "movies/base.html" %}
+{% block title %}首页 - 电影检索中心{% endblock %}
+
+{% block content %}
+<div class="card card-tech p-4">
+  <h3 class="mb-2">
+    <i class="fa-solid fa-satellite-dish me-2"></i>欢迎进入影片检索实验室
+  </h3>
+  <p class="text-muted-tech mb-3">
+    今天我们用 Q() 把 OR/AND 条件组合出来，让“筛选逻辑”在页面上可见、可操作。
+  </p>
+  <a class="btn btn-primary" href="{% url 'movies:search' %}">
+    <i class="fa-solid fa-magnifying-glass me-2"></i>进入高级搜索
+  </a>
+</div>
+{% endblock %}

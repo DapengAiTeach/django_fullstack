@@ -1,0 +1,137 @@
+{% extends "movies/base.html" %}
+{% block title %}高级搜索 - 电影检索中心{% endblock %}
+
+{% block content %}
+    <div class="row g-4">
+        <div class="col-lg-4">
+            <div class="card card-tech p-3">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <h5 class="mb-0"><i class="fa-solid fa-sliders me-2"></i>筛选条件</h5>
+                    <a class="btn btn-sm btn-outline-light" href="{% url 'movies:search' %}">
+                        <i class="fa-solid fa-rotate-right me-1"></i>重置
+                    </a>
+                </div>
+
+                <!-- ✅ GET 表单：每一次提交都对应一次“条件表达式组合” -->
+                <form method="get" class="vstack gap-3">
+
+                    <div>
+                        <label class="form-label text-muted-tech">关键词（title/summary）</label>
+                        <input name="kw" value="{{ kw }}" class="form-control" placeholder="例如：星际、黑客、爱情..."/>
+                        <div class="form-text text-muted-tech">
+                            字段查找：<code>__icontains</code>
+                        </div>
+                    </div>
+
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <label class="form-label text-muted-tech">最低评分</label>
+                            <input name="min_rating" value="{{ min_rating }}" class="form-control"
+                                   placeholder="例如 7.5"/>
+                            <div class="form-text text-muted-tech"><code>__gte</code></div>
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label text-muted-tech">最高评分</label>
+                            <input name="max_rating" value="{{ max_rating }}" class="form-control"
+                                   placeholder="例如 9.0"/>
+                            <div class="form-text text-muted-tech"><code>__lte</code></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="form-label text-muted-tech">分类（多选）</label>
+                        <div class="d-flex flex-wrap gap-2">
+                            {% for k, v in categories %}
+                                <input class="btn-check"
+                                       type="checkbox"
+                                       name="cat"
+                                       value="{{ k }}"
+                                       id="cat_{{ k }}"
+                                       {% if k in selected_categories %}checked{% endif %}>
+
+                                <label class="btn btn-outline-info btn-sm" for="cat_{{ k }}">
+                                    <i class="fa-solid fa-tag me-1"></i>{{ v }}
+                                </label>
+                            {% endfor %}
+                        </div>
+                        <div class="form-text text-muted-tech">
+                            字段查找：<code>__in</code>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" name="is_hot" value="1" id="is_hot"
+                                   {% if is_hot == "1" %}checked{% endif %}>
+                            <label class="form-check-label" for="is_hot">只看热门</label>
+                        </div>
+
+                        <select name="logic" class="form-select form-select-sm" style="width:auto;">
+                            <option value="and" {% if logic == "and" %}selected{% endif %}>关键词逻辑：AND</option>
+                            <option value="or" {% if logic == "or" %}selected{% endif %}>关键词逻辑：OR</option>
+                        </select>
+                    </div>
+
+                    <button class="btn btn-primary w-100">
+                        <i class="fa-solid fa-magnifying-glass me-2"></i>开始检索
+                    </button>
+                </form>
+            </div>
+
+            <div class="card card-tech p-3 mt-4">
+                <h6 class="mb-2"><i class="fa-solid fa-lightbulb me-2"></i>工程认知</h6>
+                <p class="text-muted-tech mb-0">
+                    ORM 查询不是“if else”，而是“组合条件表达式”。你在页面上每勾一次选项，
+                    实际上是在给 QuerySet 叠加一个条件块（Q / filter）。
+                </p>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <div class="card card-tech p-3">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <h5 class="mb-0"><i class="fa-solid fa-list me-2"></i>检索结果</h5>
+                    <span class="text-muted-tech small">
+          展示前 50 条（用于演示）
+        </span>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover align-middle mb-0">
+                        <thead>
+                        <tr>
+                            <th>标题</th>
+                            <th>分类</th>
+                            <th>评分</th>
+                            <th>热门</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for m in movies %}
+                            <tr>
+                                <td class="fw-semibold">{{ m.title }}</td>
+                                <td><span class="badge badge-tech">{{ m.get_category_display }}</span></td>
+                                <td>{{ m.rating }}</td>
+                                <td>
+                                    {% if m.is_hot %}
+                                        <i class="fa-solid fa-fire text-warning"></i>
+                                    {% else %}
+                                        <span class="text-muted-tech">-</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="4" class="text-center text-muted-tech py-5">
+                                    <i class="fa-regular fa-face-frown me-2"></i>没有匹配到数据，换个条件试试
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

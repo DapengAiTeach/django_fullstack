@@ -1,0 +1,110 @@
+{% load static %}
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>{% block title %}电影检索中心{% endblock %}</title>
+
+    <!-- Bootstrap 5 (bootcdn) -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- FontAwesome 6 (bootcdn) -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --tech-blue: #0b5ed7;
+            --tech-bg: #0b1220;
+            --card-bg: #0f1a2d;
+            --muted: #9fb3c8;
+        }
+
+        body {
+            background: radial-gradient(1200px 600px at 20% 0%, #102a5a 0%, var(--tech-bg) 55%, #070b14 100%);
+            color: #e8f1ff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar-tech {
+            background: rgba(15, 26, 45, .7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, .08);
+        }
+
+        .card-tech {
+            background: rgba(15, 26, 45, .72);
+            border: 1px solid rgba(255, 255, 255, .08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+            border-radius: 16px;
+        }
+
+        .text-muted-tech {
+            color: var(--muted) !important;
+        }
+
+        .footer-tech {
+            margin-top: auto;
+            background: rgba(15, 26, 45, .7);
+            border-top: 1px solid rgba(255, 255, 255, .08);
+        }
+
+        .form-control, .form-select {
+            background-color: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .10);
+            color: #e8f1ff;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: rgba(11, 94, 215, .8);
+            box-shadow: 0 0 0 .25rem rgba(11, 94, 215, .25);
+            background-color: rgba(255, 255, 255, .08);
+            color: #e8f1ff;
+        }
+
+        .badge-tech {
+            background: rgba(11, 94, 215, .18);
+            border: 1px solid rgba(11, 94, 215, .35);
+            color: #cfe2ff;
+        }
+    </style>
+</head>
+
+<body>
+<!-- 顶部导航 -->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-tech">
+    <div class="container">
+        <a class="navbar-brand fw-semibold" href="{% url 'movies:home' %}">
+            <i class="fa-solid fa-film me-2"></i>电影检索中心
+        </a>
+
+        <div class="ms-auto d-flex gap-2">
+            <a class="btn btn-outline-light btn-sm" href="{% url 'movies:search' %}">
+                <i class="fa-solid fa-magnifying-glass me-1"></i>高级搜索
+            </a>
+        </div>
+    </div>
+</nav>
+
+<main class="container py-4">
+    {% block content %}{% endblock %}
+</main>
+
+<!-- 底部导航/信息 -->
+<footer class="footer-tech py-3">
+    <div class="container d-flex flex-wrap gap-2 justify-content-between align-items-center">
+        <div class="text-muted-tech small">
+            <i class="fa-solid fa-bolt me-1"></i> ORM 条件组合演示 · Django 5 + Bootstrap 5
+        </div>
+        <div class="small">
+            <span class="text-muted-tech">Made by</span>
+            <span class="badge badge-tech rounded-pill">AI程序员张总</span>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="zh-CN" data-bs-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}QuerySet Lab{% endblock %}</title>
+
+    <!-- BootCDN：国内可访问 -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #07111f;
+            --panel: #0b1b33;
+            --line: rgba(0, 170, 255, .18);
+            --glow: rgba(0, 170, 255, .25);
+            --text: rgba(255, 255, 255, .88);
+            --muted: rgba(255, 255, 255, .58);
+            --blue: #00aaff;
+        }
+
+        body {
+            background: radial-gradient(1200px 600px at 20% -10%, rgba(0, 170, 255, .18), transparent 60%),
+            radial-gradient(900px 500px at 80% 0%, rgba(0, 170, 255, .12), transparent 55%),
+            var(--bg);
+            color: var(--text);
+        }
+
+        .navbar, .footerbar {
+            background: rgba(11, 27, 51, .72);
+            border-color: var(--line) !important;
+            backdrop-filter: blur(10px);
+        }
+
+        .card, .table, .modal-content {
+            background: rgba(11, 27, 51, .85);
+            border: 1px solid var(--line);
+            box-shadow: 0 0 0 1px rgba(0, 170, 255, .06), 0 20px 60px rgba(0, 0, 0, .35);
+        }
+
+        .btn-tech {
+            background: linear-gradient(180deg, rgba(0, 170, 255, .22), rgba(0, 170, 255, .10));
+            border: 1px solid rgba(0, 170, 255, .35);
+            color: var(--text);
+        }
+
+        .btn-tech:hover {
+            background: linear-gradient(180deg, rgba(0, 170, 255, .30), rgba(0, 170, 255, .14));
+            border-color: rgba(0, 170, 255, .55);
+        }
+
+        .form-control, .form-select {
+            background: rgba(7, 17, 31, .7);
+            border: 1px solid rgba(0, 170, 255, .22);
+            color: var(--text);
+        }
+
+        .form-control:focus, .form-select:focus {
+            box-shadow: none;
+            border-color: rgba(0, 170, 255, .55);
+        }
+
+        .text-muted {
+            color: var(--muted) !important;
+        }
+
+        .badge-tech {
+            background: rgba(0, 170, 255, .12);
+            border: 1px solid rgba(0, 170, 255, .28);
+            color: var(--text);
+        }
+
+        code {
+            color: #b9e7ff;
+        }
+
+        .app-shell {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .app-main {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+<div class="app-shell">
+
+    <!-- 顶部导航 -->
+    <nav class="navbar navbar-expand-lg border-bottom sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="{% url 'blog:home' %}">
+                <i class="fa-solid fa-flask-vial" style="color:var(--blue)"></i>
+                <span class="fw-semibold">QuerySet Lab</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="nav">
+                <div class="ms-auto d-flex gap-2">
+                    <a class="btn btn-tech btn-sm" href="{% url 'blog:seed' %}">
+                        <i class="fa-solid fa-wand-magic-sparkles me-1"></i>一键造数据
+                    </a>
+                    <a class="btn btn-tech btn-sm" href="{% url 'blog:lab' %}">
+                        <i class="fa-solid fa-magnifying-glass-chart me-1"></i>进入实验室
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主体 -->
+    <main class="app-main py-4">
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <!-- 底部导航 -->
+    <footer class="footerbar border-top py-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="small text-muted">
+                <i class="fa-regular fa-circle-question me-1"></i>
+                重点：惰性执行 · 链式调用 · values/exists/count
+            </div>
+            <div class="small text-muted">
+                Django 5 · Bootstrap 5 · 科技蓝主题
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
