@@ -1,0 +1,42 @@
+{% extends "shop/base.html" %}
+{% block title %}商品列表{% endblock %}
+{% block content %}
+<div class="card card-tech p-3">
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <h5 class="mb-0"><i class="fa-solid fa-box me-2 text-primary"></i>商品列表</h5>
+    <span class="text-muted-tech small">点击下单，体验事务 + 行锁</span>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead>
+        <tr>
+          <th>商品</th>
+          <th>价格</th>
+          <th>库存</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in products %}
+        <tr>
+          <td class="fw-semibold">{{ p.name }}</td>
+          <td>{{ p.price }}</td>
+          <td><span class="badge badge-soft">{{ p.stock }}</span></td>
+          <td class="text-end">
+            <a class="btn btn-sm btn-primary" href="{% url 'shop:order_create' p.id %}">
+              <i class="fa-solid fa-cart-plus me-1"></i>下单
+            </a>
+            <a class="btn btn-sm btn-outline-primary" href="{% url 'shop:concurrency_demo' p.id %}">
+              <i class="fa-solid fa-bug me-1"></i>并发演示
+            </a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4" class="text-center text-muted-tech py-5">暂无数据</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "shop/base.html" %}
+{% block title %}支付成功回调{% endblock %}
+{% block content %}
+<div class="card card-tech p-4">
+  <h5 class="mb-2"><i class="fa-solid fa-credit-card me-2 text-primary"></i>模拟支付成功回调</h5>
+  <p class="text-muted-tech">
+    订单：<b>#{{ order.id }}</b> · 当前状态：<span class="badge badge-soft">{{ order.status }}</span>
+  </p>
+
+  <form method="post" class="vstack gap-3">
+    {% csrf_token %}
+    <div>
+      <label class="form-label text-muted-tech">{{ form.payment_no.label }}</label>
+      {{ form.payment_no }}
+      <div class="form-text text-muted-tech">
+        幂等要求：同一订单多次回调，只允许首次把 CREATED -> PAID
+      </div>
+    </div>
+    <button class="btn btn-primary">
+      <i class="fa-solid fa-check me-2"></i>提交回调（成功）
+    </button>
+  </form>
+
+  <div class="mt-3">
+    <a class="btn btn-outline-danger" href="{% url 'shop:pay_fail' order.id %}">
+      <i class="fa-solid fa-xmark me-1"></i>改走失败回调（回滚库存）
+    </a>
+  </div>
+</div>
+{% endblock %}

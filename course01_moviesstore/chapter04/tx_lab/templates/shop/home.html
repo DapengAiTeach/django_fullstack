@@ -1,0 +1,13 @@
+{% extends "shop/base.html" %}
+{% block title %}首页 - 事务控制{% endblock %}
+{% block content %}
+<div class="card card-tech p-4">
+  <h3 class="mb-2"><i class="fa-solid fa-triangle-exclamation me-2 text-primary"></i>不用事务的 ORM = 不可靠的系统</h3>
+  <p class="text-muted-tech mb-3">
+    工程三连：下单 → 扣库存 → 支付状态更新。任何一步出错，都必须能回滚，才能保证数据一致性。
+  </p>
+  <a class="btn btn-primary" href="{% url 'shop:product_list' %}">
+    <i class="fa-solid fa-box me-2"></i>进入商品列表
+  </a>
+</div>
+{% endblock %}

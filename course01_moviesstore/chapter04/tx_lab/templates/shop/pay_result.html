@@ -1,0 +1,23 @@
+{% extends "shop/base.html" %}
+{% block title %}支付结果{% endblock %}
+{% block content %}
+<div class="card card-tech p-4">
+  {% if ok %}
+    <h5 class="mb-2 text-success"><i class="fa-solid fa-circle-check me-2"></i>操作成功</h5>
+  {% else %}
+    <h5 class="mb-2 text-danger"><i class="fa-solid fa-circle-xmark me-2"></i>操作失败</h5>
+  {% endif %}
+
+  <p class="text-muted-tech mb-2">{{ msg }}</p>
+
+  <div class="d-flex flex-wrap gap-2">
+    <span class="badge badge-soft">订单#{{ order.id }}</span>
+    <span class="badge badge-soft">状态：{{ order.status }}</span>
+    <span class="badge badge-soft">支付单号：{{ order.payment_no|default:"-" }}</span>
+  </div>
+
+  <div class="mt-3">
+    <a class="btn btn-outline-primary" href="{% url 'shop:product_list' %}">返回商品列表</a>
+  </div>
+</div>
+{% endblock %}
