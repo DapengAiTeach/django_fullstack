@@ -1,0 +1,45 @@
+{% extends "movies/base.html" %}
+{% block title %}导演详情{% endblock %}
+{% block content %}
+<div class="row g-4">
+  <div class="col-lg-4">
+    <div class="card card-tech p-4">
+      <h5 class="mb-1">{{ director.name }}</h5>
+      <div class="text-muted-tech small">
+        反向入口：<code>director.movies</code>（来自 related_name）
+      </div>
+      <hr class="border-secondary">
+      <div class="text-muted-tech">旗下电影平均评分：</div>
+      <div class="fs-4 fw-semibold">
+        {% if avg_score %}{{ avg_score|floatformat:1 }}{% else %}-{% endif %}
+      </div>
+      <div class="text-muted-tech small">
+        统计写法：<code>director.movies.aggregate(Avg("review__score"))</code>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-8">
+    <div class="card card-tech p-3">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h6 class="mb-0"><i class="fa-solid fa-film me-2"></i>电影列表（反向查询）</h6>
+        <span class="text-muted-tech small">director.movies.order_by("-created_at")</span>
+      </div>
+
+      <div class="list-group list-group-flush">
+        {% for m in movies %}
+          <a class="list-group-item list-group-item-action bg-transparent text-white border-secondary"
+             href="{% url 'movies:movie_detail' m.pk %}">
+            <div class="d-flex justify-content-between">
+              <div class="fw-semibold">{{ m.title }}</div>
+              <div class="text-muted-tech"><i class="fa-solid fa-angle-right"></i></div>
+            </div>
+          </a>
+        {% empty %}
+          <div class="text-muted-tech p-4">没有电影</div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

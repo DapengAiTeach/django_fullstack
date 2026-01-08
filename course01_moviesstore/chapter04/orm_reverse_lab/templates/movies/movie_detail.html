@@ -1,0 +1,62 @@
+{% extends "movies/base.html" %}
+{% block title %}电影详情{% endblock %}
+{% block content %}
+<div class="row g-4">
+  <div class="col-lg-6">
+    <div class="card card-tech p-4">
+      <h4 class="mb-2">{{ movie.title }}</h4>
+      <p class="text-muted-tech mb-0">
+        正向：<code>movie.director</code> → {{ movie.director.name }}
+      </p>
+      <p class="text-muted-tech">
+        反向：<code>movie.review_set</code>（默认反向名）
+      </p>
+    </div>
+
+    <div class="card card-tech p-4 mt-4">
+      <h6 class="mb-3"><i class="fa-solid fa-pen me-2"></i>发表评论（交互）</h6>
+      <form method="post" class="vstack gap-2">
+        {% csrf_token %}
+        <div>
+          <label class="form-label text-muted-tech">{{ form.nickname.label }}</label>
+          {{ form.nickname }}
+        </div>
+        <div>
+          <label class="form-label text-muted-tech">{{ form.score.label }}</label>
+          {{ form.score }}
+        </div>
+        <div>
+          <label class="form-label text-muted-tech">{{ form.content.label }}</label>
+          {{ form.content }}
+        </div>
+        <button class="btn btn-primary">
+          <i class="fa-solid fa-paper-plane me-2"></i>提交评论
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="card card-tech p-3">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h6 class="mb-0"><i class="fa-solid fa-comments me-2"></i>评论列表（反向查询）</h6>
+        <span class="text-muted-tech small">movie.review_set.order_by("-created_at")</span>
+      </div>
+      <div class="vstack gap-2">
+        {% for r in reviews %}
+          <div class="p-3 border border-secondary rounded-3">
+            <div class="d-flex justify-content-between">
+              <div class="fw-semibold">{{ r.nickname }}</div>
+              <div class="text-muted-tech">评分 {{ r.score }}</div>
+            </div>
+            <div class="text-muted-tech small">{{ r.created_at|date:"Y-m-d H:i" }}</div>
+            <div class="mt-2">{{ r.content }}</div>
+          </div>
+        {% empty %}
+          <div class="text-muted-tech p-4">还没有评论，快来抢沙发</div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
