@@ -1,0 +1,39 @@
+{% extends "movies/base.html" %}
+{% block title %}电影详情{% endblock %}
+{% block content %}
+<div class="row g-4">
+  <div class="col-lg-5">
+    <div class="card card-tech p-4">
+      <h4 class="mb-2">{{ movie.title }}</h4>
+
+      {% if movie.cover %}
+        <img src="{{ movie.cover.url }}" class="img-fluid rounded-3" alt="cover">
+      {% else %}
+        <div class="rounded-3 d-flex align-items-center justify-content-center"
+             style="height:260px;border:1px dashed #c7d8ff;background:#f3f7ff;">
+          <span class="text-muted-tech"><i class="fa-regular fa-image me-1"></i>无封面</span>
+        </div>
+      {% endif %}
+
+      {% if movie.description %}
+        <p class="text-muted-tech mt-3 mb-0">{{ movie.description }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="col-lg-7">
+    <div class="card card-tech p-4">
+      <h6 class="mb-3"><i class="fa-solid fa-images me-2 text-primary"></i>剧照（反向查询：movie.photos）</h6>
+      <div class="row g-2">
+        {% for p in movie.photos.all %}
+          <div class="col-6 col-md-4">
+            <img src="{{ p.image.url }}" class="img-fluid rounded-3" alt="photo">
+          </div>
+        {% empty %}
+          <div class="text-muted-tech">暂无剧照</div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

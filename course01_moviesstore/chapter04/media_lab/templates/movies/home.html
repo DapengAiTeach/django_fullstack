@@ -1,0 +1,13 @@
+{% extends "movies/base.html" %}
+{% block title %}首页 - 电影图库{% endblock %}
+{% block content %}
+<div class="card card-tech p-4">
+  <h3 class="mb-2"><i class="fa-solid fa-cloud-arrow-up me-2 text-primary"></i>ORM + 媒体文件管理</h3>
+  <p class="text-muted-tech mb-3">
+    你将实现：上传封面（单图）、上传剧照（多图）、列表/详情展示、删除记录自动清理文件。
+  </p>
+  <a class="btn btn-primary" href="{% url 'movies:movie_create' %}">
+    <i class="fa-solid fa-plus me-2"></i>开始上传
+  </a>
+</div>
+{% endblock %}

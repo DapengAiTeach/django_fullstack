@@ -1,0 +1,101 @@
+{% extends "movies/base.html" %}
+
+{% block title %}上传新电影{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+
+    <div class="card card-tech p-4">
+      <h4 class="mb-3">
+        <i class="fa-solid fa-cloud-arrow-up me-2 text-primary"></i>
+        上传新电影
+      </h4>
+
+      <p class="text-muted-tech mb-4">
+        本页面演示：<b>ORM + Media 文件管理</b><br>
+        封面：ModelForm（单图）｜ 剧照：HTML 多文件上传
+      </p>
+
+      {# ✅ Django 5：必须加 enctype #}
+      <form method="post" enctype="multipart/form-data" class="vstack gap-4">
+        {% csrf_token %}
+
+        <!-- 电影标题 -->
+        <div>
+          <label class="form-label text-muted-tech">
+            {{ form.title.label }}
+          </label>
+          {{ form.title }}
+        </div>
+
+        <!-- 电影简介 -->
+        <div>
+          <label class="form-label text-muted-tech">
+            {{ form.description.label }}
+          </label>
+          {{ form.description }}
+        </div>
+
+        <!-- 封面图（单文件，ModelForm 管） -->
+        <div>
+          <label class="form-label text-muted-tech">
+            {{ form.cover.label }}
+          </label>
+          {{ form.cover }}
+          <div class="form-text text-muted-tech">
+            单图上传：<code>ImageField</code>，文件保存到 <code>MEDIA_ROOT</code>
+          </div>
+        </div>
+
+        <!-- 剧照（多文件，HTML 原生 input） -->
+        <div>
+          <label class="form-label text-muted-tech">
+            上传剧照（可多选）
+          </label>
+
+          <input
+            type="file"
+            name="photos"
+            class="form-control"
+            multiple
+            accept="image/*"
+          >
+
+          <div class="form-text text-muted-tech">
+            Django 5 推荐方式：HTML <code>multiple</code> +
+            <code>request.FILES.getlist("photos")</code>
+          </div>
+        </div>
+
+        <!-- 提交按钮 -->
+        <div class="d-flex gap-2 pt-2">
+          <button type="submit" class="btn btn-primary">
+            <i class="fa-solid fa-check me-2"></i>提交保存
+          </button>
+
+          <a href="{% url 'movies:movie_list' %}" class="btn btn-outline-primary">
+            <i class="fa-solid fa-arrow-left me-1"></i>返回列表
+          </a>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- 教学说明卡片 -->
+    <div class="card card-tech p-3 mt-4">
+      <h6 class="mb-2">
+        <i class="fa-solid fa-graduation-cap me-2 text-primary"></i>
+        教学要点
+      </h6>
+      <ul class="mb-0 text-muted-tech small">
+        <li>数据库只存文件路径，真实文件存放在 <code>MEDIA_ROOT</code></li>
+        <li>单文件用 <code>ModelForm</code>，多文件用 <code>request.FILES.getlist()</code></li>
+        <li>Django 5 中，<b>Form 不再支持 multiple 文件字段</b></li>
+        <li>删除模型记录时，应同步清理磁盘文件（signals）</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
