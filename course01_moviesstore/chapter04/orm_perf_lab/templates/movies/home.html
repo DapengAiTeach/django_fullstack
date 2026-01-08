@@ -1,0 +1,15 @@
+{% extends "movies/base.html" %}
+{% block title %}首页 - ORM 性能优化{% endblock %}
+{% block content %}
+<div class="card card-tech p-4">
+  <h3 class="mb-2">
+    <i class="fa-solid fa-rocket me-2 text-primary"></i>页面慢 ≠ 前端问题
+  </h3>
+  <p class="text-muted-tech mb-3">
+    这节课你会亲眼看到：同一个页面，<b>只改 ORM</b> 就能把 SQL 次数从 N+1 降到个位数。
+  </p>
+  <a class="btn btn-primary" href="{% url 'movies:movie_feed' %}">
+    <i class="fa-solid fa-layer-group me-2"></i>进入电影信息流
+  </a>
+</div>
+{% endblock %}

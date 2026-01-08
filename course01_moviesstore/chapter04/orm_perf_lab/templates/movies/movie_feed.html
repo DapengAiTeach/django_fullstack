@@ -1,0 +1,114 @@
+{% extends "movies/base.html" %}
+{% block title %}电影信息流 - ORM 性能优化{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+  <div class="col-lg-4">
+    <div class="card card-tech p-3">
+      <h5 class="mb-3"><i class="fa-solid fa-sliders me-2 text-primary"></i>性能模式</h5>
+
+      <form method="get" class="vstack gap-3">
+        <div>
+          <label class="form-label text-muted-tech">{{ form.mode.label }}</label>
+          {{ form.mode }}
+          <div class="form-text text-muted-tech">
+            慢：制造 N+1；快：select/prefetch；拆分：列表轻量化
+          </div>
+        </div>
+        <button class="btn btn-primary w-100">
+          <i class="fa-solid fa-bolt me-2"></i>应用并刷新
+        </button>
+      </form>
+    </div>
+
+    <div class="card card-tech p-3 mt-4">
+      <h6 class="mb-2"><i class="fa-solid fa-chart-line me-2 text-primary"></i>本次请求统计</h6>
+      <div class="d-flex flex-wrap gap-2">
+        <span class="badge badge-soft">模式：{{ mode }}</span>
+        <span class="badge badge-soft">耗时：{{ elapsed_ms }} ms</span>
+        <span class="badge badge-soft">SQL：{{ sql_count }}</span>
+        <span class="badge badge-soft">SQL耗时：{{ sql_time_ms }} ms</span>
+      </div>
+
+      <div class="text-muted-tech small mt-2">
+        提示：DEBUG=True 时统计更准确；生产环境请用 APM/日志/Profiler。
+      </div>
+    </div>
+
+    <div class="card card-tech p-3 mt-4">
+      <h6 class="mb-2"><i class="fa-solid fa-lightbulb me-2 text-primary"></i>课堂金句</h6>
+      <p class="text-muted-tech mb-0">
+        页面慢 ≠ 前端问题，80% 是 ORM 查询问题。<br>
+        优化第一步：先看是否 N+1。
+      </p>
+    </div>
+  </div>
+
+  <div class="col-lg-8">
+    <div class="vstack gap-3">
+      {% for m in movies %}
+        <div class="card card-tech p-3">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <div class="fw-semibold fs-5">{{ m.title }}</div>
+              <div class="text-muted-tech">
+                导演：{{ m.director.name }}
+                <span class="ms-3">创建：{{ m.created_at|date:"Y-m-d" }}</span>
+              </div>
+            </div>
+            <a class="btn btn-outline-primary btn-sm" href="{% url 'movies:movie_detail' m.pk %}">
+              详情 <i class="fa-solid fa-angle-right ms-1"></i>
+            </a>
+          </div>
+
+          <div class="mt-2">
+            <span class="text-muted-tech me-2"><i class="fa-solid fa-tags me-1"></i>标签：</span>
+            {% for t in m.tags.all %}
+              <span class="badge badge-soft me-1">{{ t.name }}</span>
+            {% empty %}
+              <span class="text-muted-tech">无</span>
+            {% endfor %}
+          </div>
+
+          <hr>
+
+          {% if mode == "split" %}
+            <div class="text-muted-tech">
+              <i class="fa-solid fa-comment-dots me-1"></i>
+              评论数：{{ m.review_count|default:0 }}（拆分模式：列表页不拉取评论详情）
+            </div>
+          {% else %}
+            <div class="text-muted-tech mb-2">
+              <i class="fa-solid fa-comment-dots me-1"></i>最新评论（3条）
+            </div>
+
+            {% if mode == "fast" %}
+              {# ✅ fast 模式：reviews 被 Prefetch 到 latest_reviews（避免每部电影再查一次） #}
+              {% for r in m.latest_reviews|slice:":3" %}
+                <div class="small">
+                  <span class="fw-semibold">{{ r.nickname }}</span>
+                  <span class="text-muted-tech">({{ r.score }})</span>：{{ r.content }}
+                </div>
+              {% empty %}
+                <div class="text-muted-tech">暂无评论</div>
+              {% endfor %}
+            {% else %}
+              {# ❌ slow 模式：这里会触发 N+1：每部电影访问 reviews 都会查询一次 #}
+              {% for r in m.reviews.all|slice:":3" %}
+                <div class="small">
+                  <span class="fw-semibold">{{ r.nickname }}</span>
+                  <span class="text-muted-tech">({{ r.score }})</span>：{{ r.content }}
+                </div>
+              {% empty %}
+                <div class="text-muted-tech">暂无评论</div>
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+        </div>
+      {% empty %}
+        <div class="card card-tech p-5 text-center text-muted-tech">暂无数据</div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
