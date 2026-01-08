@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}电影库 | MoviePerm{% endblock %}
+
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+  <div>
+    <h4 class="mb-1"><i class="fa-solid fa-film me-2 text-primary"></i>电影库</h4>
+    <div class="text-secondary small">模板里用 perms 控制按钮显示，但真正安全必须在视图里再校验。</div>
+  </div>
+
+  <div class="d-flex gap-2">
+    {% if user.is_authenticated and perms.movies.add_movie %}
+      <a class="btn btn-brand text-white" href="{% url 'movies:movie_create' %}">
+        <i class="fa-solid fa-circle-plus me-1"></i>新增电影
+      </a>
+    {% else %}
+      <button class="btn btn-outline-secondary" disabled title="需要登录且具备 add_movie 权限">
+        <i class="fa-solid fa-circle-plus me-1"></i>新增电影
+      </button>
+    {% endif %}
+  </div>
+</div>
+
+<div class="row g-3">
+  {% for m in movies %}
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-start">
+            <h5 class="mb-1">{{ m.title }}</h5>
+            <span class="badge text-bg-light border">{{ m.year }}</span>
+          </div>
+          <div class="text-secondary small mb-2">
+            <i class="fa-regular fa-user me-1"></i>{{ m.owner.username }}
+            <span class="mx-2">·</span>
+            <i class="fa-regular fa-clock me-1"></i>{{ m.created_at|date:"Y-m-d H:i" }}
+          </div>
+          <p class="text-secondary small mb-3">{{ m.summary|default:"暂无简介"|truncatechars:60 }}</p>
+
+          <div class="d-flex flex-wrap gap-2">
+            <a class="btn btn-outline-primary btn-sm" href="{% url 'movies:movie_detail' m.pk %}">
+              <i class="fa-regular fa-eye me-1"></i>详情
+            </a>
+
+            {% if user.is_authenticated and perms.movies.change_movie %}
+              <a class="btn btn-outline-secondary btn-sm" href="{% url 'movies:movie_update' m.pk %}">
+                <i class="fa-regular fa-pen-to-square me-1"></i>编辑
+              </a>
+            {% endif %}
+
+            {% if user.is_authenticated and perms.movies.delete_movie %}
+              <a class="btn btn-outline-danger btn-sm" href="{% url 'movies:movie_delete' m.pk %}">
+                <i class="fa-regular fa-trash-can me-1"></i>删除
+              </a>
+            {% endif %}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <div class="col-12">
+      <div class="alert alert-info shadow-sm">暂无数据，登录并分配 add_movie 权限后即可新增。</div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}删除确认 | MoviePerm{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-7">
+    <div class="card shadow-sm border-danger">
+      <div class="card-body p-4">
+        <h5 class="mb-2 text-danger">
+          <i class="fa-solid fa-triangle-exclamation me-2"></i>确认删除？
+        </h5>
+        <div class="text-secondary mb-3">
+          你将删除：<b>{{ movie.title }}</b>（{{ movie.year }}）
+        </div>
+
+        <form method="post">
+          {% csrf_token %}
+          <button class="btn btn-danger" type="submit">
+            <i class="fa-regular fa-trash-can me-1"></i>确认删除
+          </button>
+          <a class="btn btn-outline-secondary" href="{% url 'movies:movie_detail' movie.pk %}">
+            取消
+          </a>
+        </form>
+
+        <div class="text-secondary small mt-3">
+          删除必须走 POST + CSRF，且视图层必须做权限校验（Authorization）。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
