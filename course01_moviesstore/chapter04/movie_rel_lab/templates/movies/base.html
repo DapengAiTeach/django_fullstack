@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>{% block title %}电影商城{% endblock %}</title>
+
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #0b1220;
+            --card: #0f1a2d;
+            --muted: #9fb3c8;
+        }
+
+        body {
+            background: radial-gradient(1200px 600px at 20% 0%, #102a5a 0%, var(--bg) 55%, #070b14 100%);
+            color: #e8f1ff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar-tech {
+            background: rgba(15, 26, 45, .7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, .08);
+        }
+
+        .card-tech {
+            background: rgba(15, 26, 45, .72);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+        }
+
+        .text-muted-tech {
+            color: var(--muted) !important;
+        }
+
+        .footer-tech {
+            margin-top: auto;
+            background: rgba(15, 26, 45, .7);
+            border-top: 1px solid rgba(255, 255, 255, .08);
+        }
+
+        .form-control, .form-select {
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .10);
+            color: #e8f1ff;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark navbar-tech">
+    <div class="container">
+        <a class="navbar-brand fw-semibold" href="{% url 'movies:home' %}">
+            <i class="fa-solid fa-film me-2"></i>电影商城关系模型实验室
+        </a>
+        <div class="ms-auto d-flex gap-2">
+            <a class="btn btn-outline-light btn-sm" href="{% url 'movies:movie_list' %}">
+                <i class="fa-solid fa-list me-1"></i>电影列表
+            </a>
+            <a class="btn btn-primary btn-sm" href="{% url 'movies:order_create' %}">
+                <i class="fa-solid fa-cart-plus me-1"></i>创建订单
+            </a>
+        </div>
+    </div>
+</nav>
+
+<main class="container py-4">
+    {% block content %}{% endblock %}
+</main>
+
+<footer class="footer-tech py-3">
+    <div class="container d-flex justify-content-between align-items-center">
+        <div class="text-muted-tech small">
+            <i class="fa-solid fa-link me-1"></i>一对多 · 一对一 · 多对多（含中间表）
+        </div>
+        <div class="small"><span class="text-muted-tech">Made by</span> <span
+                class="badge bg-primary">AI程序员张总</span></div>
+    </div>
+</footer>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
