@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}登录 | Permission Watch{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-md-6 col-lg-5">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h5 class="mb-3"><i class="fa-solid fa-right-to-bracket me-2 text-primary"></i>登录</h5>
+        <form method="post">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label class="form-label">{{ form.username.label }}</label>
+            {{ form.username }}
+          </div>
+          <div class="mb-3">
+            <label class="form-label">{{ form.password.label }}</label>
+            {{ form.password }}
+          </div>
+          <button class="btn btn-brand text-white w-100" type="submit">
+            <i class="fa-solid fa-key me-1"></i>进入仪表盘
+          </button>
+        </form>
+        <div class="text-secondary small mt-3">
+          只有登录后我们才去调用 API 读取数据库里的权限记录（更贴近真实业务：权限属于用户体系）。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

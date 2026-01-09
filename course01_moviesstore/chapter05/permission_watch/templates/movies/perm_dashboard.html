@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block title %}权限仪表盘 | Permission Watch{% endblock %}
+
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+  <div>
+    <h4 class="mb-1"><i class="fa-solid fa-gauge-high me-2 text-primary"></i>默认权限仪表盘</h4>
+    <div class="text-secondary small">
+      本页专门讲清楚：默认权限来源、<span class="mono">app_label.codename</span> 命名规则、以及如何在数据库中查看权限。
+    </div>
+  </div>
+
+  <div class="d-flex gap-2">
+    {% if user.is_authenticated %}
+      <button id="btnReload" class="btn btn-brand text-white">
+        <i class="fa-solid fa-rotate me-1"></i>刷新权限
+      </button>
+    {% else %}
+      <a class="btn btn-brand text-white" href="{% url 'accounts:login' %}">
+        <i class="fa-solid fa-right-to-bracket me-1"></i>登录后查看权限
+      </a>
+    {% endif %}
+  </div>
+</div>
+
+<div class="row g-3">
+  <div class="col-12 col-lg-5">
+    <div class="card shadow-sm h-100">
+      <div class="card-body">
+        <h6 class="mb-2"><i class="fa-solid fa-lightbulb me-2 text-primary"></i>规则速记（必须背下来）</h6>
+        <ul class="mb-0">
+          <li><b>默认权限</b>：每个模型迁移后自动生成 4 条：add/change/delete/view</li>
+          <li><b>codename</b>：<span class="mono">动作_模型名小写</span>，例如 <span class="mono">add_movie</span></li>
+          <li><b>app_label</b>：应用名（本例为 <span class="mono">movies</span>）</li>
+          <li><b>权限点</b>：<span class="mono">app_label.codename</span>，例如 <span class="mono">movies.add_movie</span></li>
+          <li><b>数据库表</b>：权限在 <span class="mono">auth_permission</span>，归属靠 <span class="mono">django_content_type</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-7">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h6 class="mb-3"><i class="fa-solid fa-database me-2 text-primary"></i>数据库中的默认权限（Movie 模型）</h6>
+
+        {% if not user.is_authenticated %}
+          <div class="alert alert-info mb-0">
+            为了贴近真实权限系统，本页通过登录用户去读取数据库权限数据。请先登录。
+          </div>
+        {% else %}
+          <div class="table-responsive">
+            <table class="table table-sm align-middle mb-0">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>perm_key（app_label.codename）</th>
+                  <th>codename</th>
+                  <th>name（人类可读）</th>
+                </tr>
+              </thead>
+              <tbody id="permBody">
+                <tr><td colspan="4" class="text-secondary">点击“刷新权限”从数据库加载…</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="text-secondary small mt-3">
+            你也可以打开 Admin → Authentication and Authorization → Permissions 直接查看同一批数据。
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% if user.is_authenticated %}
+<script>
+  async function loadPerms() {
+    const body = document.getElementById("permBody");
+    body.innerHTML = `<tr><td colspan="4" class="text-secondary">加载中...</td></tr>`;
+
+    const resp = await fetch("{% url 'movies:default_perms_api' %}");
+    if (!resp.ok) {
+      body.innerHTML = `<tr><td colspan="4" class="text-danger">加载失败：${resp.status}</td></tr>`;
+      return;
+    }
+
+    const data = await resp.json();
+    const items = data.items || [];
+    if (items.length === 0) {
+      body.innerHTML = `<tr><td colspan="4" class="text-secondary">未找到默认权限（请确认已 migrate 且 Movie 模型存在）</td></tr>`;
+      return;
+    }
+
+    body.innerHTML = items.map(p => `
+      <tr>
+        <td class="mono">${p.id}</td>
+        <td class="mono"><span class="badge text-bg-light border">${p.perm_key}</span></td>
+        <td class="mono">${p.codename}</td>
+        <td>${p.name}</td>
+      </tr>
+    `).join("");
+  }
+
+  document.getElementById("btnReload").addEventListener("click", loadPerms);
+
+  // 页面打开自动加载一次
+  loadPerms();
+</script>
+{% endif %}
+{% endblock %}
