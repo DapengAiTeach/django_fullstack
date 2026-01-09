@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}个人中心 | Login Lab{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-body p-4">
+    <h4 class="mb-2"><i class="fa-regular fa-id-badge me-2 text-primary"></i>个人中心</h4>
+    <div class="text-secondary mb-3">
+      你已登录为：<span class="mono">{{ user.username }}</span>
+    </div>
+
+    <div class="alert alert-info shadow-sm mb-0">
+      访问本页必须登录：未登录会被 <span class="mono">login_required</span>
+      重定向到 <span class="mono">LOGIN_URL</span> 并携带 next 参数。
+    </div>
+  </div>
+</div>
+{% endblock %}

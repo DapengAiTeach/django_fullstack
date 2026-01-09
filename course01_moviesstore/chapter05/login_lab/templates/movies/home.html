@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}首页 | Login Lab{% endblock %}
+
+{% block content %}
+<div class="row g-3">
+  <div class="col-12 col-lg-7">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h4 class="mb-2"><i class="fa-solid fa-house me-2 text-primary"></i>欢迎来到登录实验室</h4>
+        <p class="text-secondary mb-3">
+          这套案例用最少的代码，把 <span class="mono">authenticate / login / logout</span> 和 Session 登录态维持讲透。
+        </p>
+
+        <div class="d-flex flex-wrap gap-2">
+          <a class="btn btn-brand text-white" href="{% url 'movies:profile' %}">
+            <i class="fa-regular fa-id-badge me-1"></i>进入个人中心（需登录）
+          </a>
+          <a class="btn btn-outline-primary" href="{% url 'movies:session_debug' %}">
+            <i class="fa-solid fa-cookie-bite me-1"></i>查看 Session 演示
+          </a>
+        </div>
+
+        <hr>
+        <div class="text-secondary small">
+          当前状态：
+          {% if user.is_authenticated %}
+            <span class="badge text-bg-success"><i class="fa-solid fa-check me-1"></i>已登录</span>
+          {% else %}
+            <span class="badge text-bg-secondary"><i class="fa-solid fa-xmark me-1"></i>未登录</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-5">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h6 class="mb-2"><i class="fa-solid fa-map me-2 text-primary"></i>课堂讲解路线</h6>
+        <ol class="mb-0 text-secondary">
+          <li>未登录访问个人中心 → 被重定向到 LOGIN_URL</li>
+          <li>登录成功 → 回到 next 或 LOGIN_REDIRECT_URL</li>
+          <li>Session 演示页 → 写入并跨请求维持数据</li>
+          <li>退出 → request.user 变回 AnonymousUser</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

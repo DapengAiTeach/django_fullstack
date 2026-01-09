@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Session 演示 | Login Lab{% endblock %}
+
+{% block content %}
+<div class="row g-3">
+  <div class="col-12 col-lg-7">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h4 class="mb-2"><i class="fa-solid fa-cookie-bite me-2 text-primary"></i>Session 演示</h4>
+        <p class="text-secondary mb-3">
+          刷新本页面，观察 session 数据是否跨请求保持（这就是“登录态维持”的同类机制）。
+        </p>
+
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between">
+            <span class="text-secondary">session_key</span>
+            <span class="mono">{{ session_key }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span class="text-secondary">visit_count</span>
+            <span class="mono">{{ visit_count }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span class="text-secondary">last_seen</span>
+            <span class="mono">{{ last_seen }}</span>
+          </li>
+        </ul>
+
+        <div class="d-flex gap-2 mt-3">
+          <a class="btn btn-outline-primary" href="{% url 'movies:session_debug' %}">
+            <i class="fa-solid fa-rotate me-1"></i>刷新页面
+          </a>
+          <a class="btn btn-outline-secondary" href="{% url 'movies:home' %}">
+            <i class="fa-solid fa-arrow-left me-1"></i>返回首页
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-5">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h6 class="mb-2"><i class="fa-solid fa-book-open me-2 text-primary"></i>你要讲清楚的关键点</h6>
+        <ul class="text-secondary mb-0">
+          <li><b>login</b> 会把用户 id 写进 Session</li>
+          <li>浏览器保存 sessionid（Cookie）</li>
+          <li>下次请求带着 sessionid → 找回 Session → 还原 user</li>
+          <li>logout 会清空会话相关信息</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
