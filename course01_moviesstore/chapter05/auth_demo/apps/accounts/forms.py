@@ -59,8 +59,15 @@ class LoginForm(AuthenticationForm):
         label="密码",
         widget=forms.PasswordInput(attrs={"class": "form-control", "placeholder": "请输入密码"}),
     )
+    captcha = CaptchaField(label="验证码")
 
     error_messages = {
         "invalid_login": "账号或密码错误。",
         "inactive": "该账号已被停用。",
     }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["captcha"].widget.attrs.update(
+            {"class": "form-control", "placeholder": "请输入验证码"}
+        )
