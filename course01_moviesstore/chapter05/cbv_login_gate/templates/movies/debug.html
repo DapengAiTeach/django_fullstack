@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}排查页 | CBV Gate{% endblock %}
+
+{% block content %}
+<div class="row g-3">
+  <div class="col-12 col-lg-6">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h4 class="mb-2"><i class="fa-solid fa-screwdriver-wrench me-2 text-primary"></i>运行状态</h4>
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between">
+            <span class="text-secondary">is_authenticated</span>
+            <span class="mono">{{ is_auth }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span class="text-secondary">username</span>
+            <span class="mono">{{ username|default:"-" }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span class="text-secondary">LOGIN_URL</span>
+            <span class="mono">{{ login_url_setting }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-6">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h4 class="mb-2"><i class="fa-solid fa-triangle-exclamation me-2 text-primary"></i>常见错误与排查</h4>
+        <ol class="text-secondary mb-0">
+          <li><b>Mixin 放错位置：</b>必须 <span class="mono">LoginRequiredMixin</span> 最左。</li>
+          <li><b>未配置 LOGIN_URL：</b>会跳到默认登录地址或报错，务必配置。</li>
+          <li><b>缺少 AuthenticationMiddleware：</b><span class="mono">request.user</span> 不可靠，门禁异常。</li>
+          <li><b>缺少 SessionMiddleware：</b>无法维持登录态。</li>
+          <li><b>忘记 include(accounts.urls)：</b>登录 URL 解析失败。</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

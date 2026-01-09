@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}首页 | CBV Gate{% endblock %}
+
+{% block content %}
+<div class="row g-3">
+  <div class="col-12 col-lg-7">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h4 class="mb-2"><i class="fa-solid fa-shield-halved me-2 text-primary"></i>CBV 登录门禁中心</h4>
+        <p class="text-secondary mb-3">
+          点击 <b>VIP(CBV)</b>：未登录会被 <span class="mono">LoginRequiredMixin</span> 拦截并重定向到登录页（自动带 next）。
+        </p>
+        <div class="d-flex flex-wrap gap-2">
+          <a class="btn btn-brand text-white" href="{% url 'movies:vip_cbv' %}">
+            <i class="fa-solid fa-crown me-1"></i>进入 VIP(CBV)
+          </a>
+          <a class="btn btn-outline-primary" href="{% url 'movies:mro' %}">
+            <i class="fa-solid fa-diagram-project me-1"></i>查看 MRO 顺序
+          </a>
+          <a class="btn btn-outline-secondary" href="{% url 'movies:debug' %}">
+            <i class="fa-solid fa-screwdriver-wrench me-1"></i>常见错误排查
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-5">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h6 class="mb-2"><i class="fa-solid fa-list-check me-2 text-primary"></i>本节你要讲透的点</h6>
+        <ol class="text-secondary mb-0">
+          <li><span class="mono">LoginRequiredMixin</span> 重写 <span class="mono">dispatch()</span></li>
+          <li><span class="mono">dispatch</span> 是 CBV 总入口</li>
+          <li>Mixin 放错位置会导致门禁失效</li>
+          <li>排查：LOGIN_URL / Middleware / MRO</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

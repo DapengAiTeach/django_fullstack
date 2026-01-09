@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}MRO顺序 | CBV Gate{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-body p-4">
+    <h4 class="mb-2"><i class="fa-solid fa-diagram-project me-2 text-primary"></i>Mixin 执行顺序（MRO）</h4>
+    <p class="text-secondary">
+      Python 会按 MRO 顺序查找 <span class="mono">dispatch()</span>。因此 <b>LoginRequiredMixin 必须在最左边</b> 才能优先命中它的 dispatch。
+    </p>
+
+    <div class="alert alert-light border shadow-sm">
+      <div class="fw-semibold mb-2">VipCBVView.mro()</div>
+      <ol class="mono mb-0">
+        {% for c in vip_mro %}
+          <li>{{ c }}</li>
+        {% endfor %}
+      </ol>
+    </div>
+
+    <div class="text-secondary small">
+      常见错误：把继承写成 <span class="mono">class VipCBVView(TemplateView, LoginRequiredMixin)</span>，
+      会导致 TemplateView 的 dispatch 先被解析，门禁失效。
+    </div>
+  </div>
+</div>
+{% endblock %}

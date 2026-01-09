@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}VIP(CBV) | CBV Gate{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-body p-4">
+    <h4 class="mb-2"><i class="fa-solid fa-crown me-2 text-primary"></i>VIP 页面（CBV 保护成功）</h4>
+    <p class="text-secondary mb-3">
+      你能到这里，说明 <span class="mono">LoginRequiredMixin.dispatch()</span> 已放行。
+    </p>
+    <div class="alert alert-info shadow-sm mb-0">
+      当前用户：<span class="mono">{{ user.username }}</span><br>
+      课堂重点：未登录请求会被重定向到 <span class="mono">LOGIN_URL</span> 并自动携带 <span class="mono">next</span>。
+    </div>
+  </div>
+</div>
+{% endblock %}

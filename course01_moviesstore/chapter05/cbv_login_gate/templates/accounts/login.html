@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}登录 | CBV Gate{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-md-7 col-lg-5">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <div class="d-flex align-items-center justify-content-between mb-2">
+          <h5 class="mb-0"><i class="fa-solid fa-right-to-bracket me-2 text-primary"></i>账号登录</h5>
+          <span class="badge text-bg-light border"><i class="fa-solid fa-arrow-turn-down me-1"></i>支持 next</span>
+        </div>
+
+        {% if request.GET.next %}
+          <div class="alert alert-info shadow-sm small">
+            登录后将返回：<span class="mono">{{ request.GET.next }}</span>
+          </div>
+        {% endif %}
+
+        <form method="post">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label class="form-label">{{ form.username.label }}</label>
+            {{ form.username }}
+          </div>
+          <div class="mb-3">
+            <label class="form-label">{{ form.password.label }}</label>
+            {{ form.password }}
+          </div>
+
+          <button class="btn btn-brand text-white w-100" type="submit">
+            <i class="fa-solid fa-key me-1"></i>登录
+          </button>
+        </form>
+
+        <div class="alert alert-info shadow-sm mt-3 mb-0">
+          <div class="small">
+            <div class="fw-semibold mb-1"><i class="fa-solid fa-circle-info me-1"></i>课堂账号</div>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="badge text-bg-light border">admin / admin123456</span>
+              <span class="badge text-bg-light border">alice / alice123456</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-secondary small mt-3">
+          重点：CBV 的门禁来自 <span class="mono">dispatch()</span> 的 MRO 顺序，Mixin 放最左才会优先拦截。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
