@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% block title %}我的权限面板 | PermLab{% endblock %}
+
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+  <div>
+    <h4 class="mb-1"><i class="fa-regular fa-id-badge me-2 text-primary"></i>我的权限面板</h4>
+    <div class="text-secondary small">
+      这里把 <b>User / Group / Permission</b> 以及“合并机制”一次性看明白。
+    </div>
+  </div>
+  <a class="btn btn-outline-secondary" href="/admin/" target="_blank">
+    <i class="fa-solid fa-screwdriver-wrench me-1"></i>打开 Admin 分配权限
+  </a>
+</div>
+
+<div class="row g-3">
+  <div class="col-12 col-lg-4">
+    <div class="card shadow-sm h-100">
+      <div class="card-body">
+        <h6 class="mb-3"><i class="fa-regular fa-user me-2 text-primary"></i>User 结构（关键字段）</h6>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between">
+            <span class="text-secondary">username</span><span class="mono">{{ user.username }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span class="text-secondary">is_active</span><span class="mono">{{ user.is_active }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span class="text-secondary">is_staff</span><span class="mono">{{ user.is_staff }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span class="text-secondary">is_superuser</span><span class="mono">{{ user.is_superuser }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span class="text-secondary">last_login</span><span class="mono">{{ user.last_login|default:"-" }}</span>
+          </li>
+        </ul>
+        <div class="text-secondary small mt-3">
+          <b>User</b> 里有两条重要关系：<span class="mono">groups</span> 与 <span class="mono">user_permissions</span>。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-4">
+    <div class="card shadow-sm h-100">
+      <div class="card-body">
+        <h6 class="mb-3"><i class="fa-solid fa-users me-2 text-primary"></i>Group（角色）</h6>
+        {% if groups %}
+          <div class="d-flex flex-wrap gap-2">
+            {% for g in groups %}
+              <span class="badge text-bg-light border"><i class="fa-solid fa-user-group me-1"></i>{{ g.name }}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="alert alert-info mb-0">当前用户还没有加入任何 Group（角色）。</div>
+        {% endif %}
+
+        <hr>
+        <h6 class="mb-2"><i class="fa-solid fa-key me-2 text-primary"></i>通过 Group 获得的权限（部分）</h6>
+        {% if group_perms %}
+          <ul class="small mb-0">
+            {% for p in group_perms|slice:":12" %}
+              <li><span class="mono">{{ p.content_type.app_label }}.{{ p.codename }}</span> - {{ p.name }}</li>
+            {% endfor %}
+          </ul>
+          <div class="text-secondary small mt-2">（仅展示前 12 条）</div>
+        {% else %}
+          <div class="text-secondary small">无</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-4">
+    <div class="card shadow-sm h-100">
+      <div class="card-body">
+        <h6 class="mb-3"><i class="fa-solid fa-user-lock me-2 text-primary"></i>用户直接权限（user_permissions）</h6>
+        {% if direct_perms %}
+          <ul class="small mb-0">
+            {% for p in direct_perms|slice:":12" %}
+              <li><span class="mono">{{ p.content_type.app_label }}.{{ p.codename }}</span> - {{ p.name }}</li>
+            {% endfor %}
+          </ul>
+          <div class="text-secondary small mt-2">（仅展示前 12 条）</div>
+        {% else %}
+          <div class="alert alert-info mb-0">当前用户没有直接分配权限（全部来自 Group 或无权限）。</div>
+        {% endif %}
+
+        <hr>
+        <h6 class="mb-2"><i class="fa-solid fa-check-double me-2 text-primary"></i>最终权限判定（has_perm）</h6>
+        <div class="table-responsive">
+          <table class="table table-sm align-middle mb-0">
+            <thead>
+              <tr>
+                <th>权限点</th>
+                <th class="text-end">是否生效</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for code, ok in demo_results %}
+              <tr>
+                <td class="mono">{{ code }}</td>
+                <td class="text-end">
+                  {% if ok %}
+                    <span class="badge text-bg-success"><i class="fa-solid fa-check me-1"></i>True</span>
+                  {% else %}
+                    <span class="badge text-bg-secondary"><i class="fa-solid fa-xmark me-1"></i>False</span>
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="text-secondary small mt-3">
+          <b>合并机制：</b><span class="mono">has_perm</span> 会综合判断：
+          用户直接权限 + 用户所属组权限（超级用户几乎都为 True）。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

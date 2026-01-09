@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}电影库 | PermLab{% endblock %}
+
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+  <div>
+    <h4 class="mb-1"><i class="fa-solid fa-film me-2 text-primary"></i>电影库</h4>
+    <div class="text-secondary small">这个页面只是展示数据，重点在“我的权限面板”理解三大模型。</div>
+  </div>
+</div>
+
+<div class="row g-3">
+  {% for m in movies %}
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="mb-1">{{ m.title }}</h5>
+          <div class="text-secondary small"><i class="fa-regular fa-calendar me-1"></i>{{ m.year }}</div>
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <div class="col-12">
+      <div class="alert alert-info shadow-sm mb-0">暂无电影数据，运行初始化脚本即可生成。</div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}
