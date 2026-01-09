@@ -1,34 +1,38 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="zh">
+﻿{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootstrap 5 卡片与图标示例</title>
-    <link href="{% static 'bootstrap5/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'fontawesome6/css/all.min.css' %}" rel="stylesheet">
-</head>
+{% block title %}MoviesStore | 主页{% endblock %}
 
-<body>
-<div class="container my-5">
-    <h2 class="text-center text-primary">Bootstrap 5 卡片与图标示例</h2>
-
-    <!-- 卡片1 -->
-    <div class="card" style="width: 18rem;">
-        <img src="https://wp.upx8.com/api.php" class="card-img-top" alt="图片">
-        <div class="card-body">
-            <h5 class="card-title"><i class="fa fa-info-circle"></i> 卡片标题</h5>
-            <p class="card-text">这是卡片的内容部分，包含了一些文本。</p>
-            <a href="#" class="btn btn-primary"><i class="fa fa-arrow-right"></i> 点击这里</a>
-        </div>
-        <div class="card-footer text-muted">
-            <i class="fa fa-star"></i> 收藏
+{% block content %}
+<div class="row align-items-center gy-4">
+    <div class="col-lg-7">
+        <h1 class="display-5 fw-bold mb-3">在这里发现下一部好电影</h1>
+        <p class="lead text-secondary mb-4">
+            MoviesStore 集合了热门影片、分类与评分，支持明暗主题切换，让探索更舒适。
+        </p>
+        <div class="d-flex flex-wrap gap-2">
+            <a class="btn btn-primary btn-lg" href="/movies/">开始浏览</a>
+            <a class="btn btn-outline-secondary btn-lg" href="/categories/">查看分类</a>
         </div>
     </div>
-
+    <div class="col-lg-5">
+        <div class="card shadow-sm">
+            <img src="https://wp.upx8.com/api.php" class="card-img-top" alt="电影海报">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fa-solid fa-circle-info text-primary"></i>
+                    今日推荐
+                </h5>
+                <p class="card-text">精选口碑影片与最新热榜，让你快速找到心仪内容。</p>
+                <a href="#" class="btn btn-primary">
+                    <i class="fa-solid fa-arrow-right"></i>
+                    立即查看
+                </a>
+            </div>
+            <div class="card-footer text-muted">
+                <i class="fa-solid fa-star"></i>
+                评分 8.7+
+            </div>
+        </div>
+    </div>
 </div>
-
-<script src="{% static 'bootstrap5/js/bootstrap.bundle.min.js' %}"></script>
-</body>
-</html>
+{% endblock %}
