@@ -4,6 +4,8 @@
     --app-border: rgba(16, 24, 40, 0.08);
     --app-shadow: 0 6px 30px rgba(15, 23, 42, 0.08);
     --app-brand: #0f766e;
+    --footer-bg: rgba(255, 255, 255, 0.82);
+    --footer-border: rgba(15, 23, 42, 0.08);
 }
 
 [data-bs-theme="dark"] {
@@ -12,6 +14,8 @@
     --app-border: rgba(226, 232, 240, 0.12);
     --app-shadow: 0 10px 36px rgba(0, 0, 0, 0.4);
     --app-brand: #14b8a6;
+    --footer-bg: rgba(17, 20, 27, 0.78);
+    --footer-border: rgba(226, 232, 240, 0.12);
 }
 
 body.app-body {
@@ -23,6 +27,27 @@ body.app-body {
 .app-navbar {
     border-bottom: 1px solid var(--app-border);
     box-shadow: var(--app-shadow);
+}
+
+.app-footer {
+    padding: 2rem 0 2.25rem;
+    background: var(--footer-bg);
+    border-top: 1px solid var(--footer-border);
+}
+
+.footer-brand {
+    font-size: 1.1rem;
+}
+
+.footer-link {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-link:hover,
+.footer-link:focus {
+    color: var(--app-brand);
 }
 
 .navbar-brand .fa-film {
@@ -38,4 +63,20 @@ body.app-body {
     [data-bs-theme="dark"] .app-navbar {
         background-color: rgba(13, 15, 20, 0.78);
     }
+
+    .app-footer {
+        backdrop-filter: blur(12px);
+    }
+}
+
+.footer-social .footer-link {
+    font-size: 1.1rem;
+}
+
+.footer-links .footer-link {
+    color: rgba(15, 23, 42, 0.7);
+}
+
+[data-bs-theme="dark"] .footer-links .footer-link {
+    color: rgba(226, 232, 240, 0.7);
 }
