@@ -40,11 +40,11 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="#">个人中心</a></li>
-                            <li><a class="dropdown-item" href="#">退出登录</a></li>
+                            <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">退出登录</a></li>
                         </ul>
                     </div>
                 {% else %}
-                    <a class="btn btn-outline-primary btn-sm" href="{% url 'accounts:register' %}" aria-label="登录">
+                    <a class="btn btn-outline-primary btn-sm" href="{% url 'accounts:login' %}" aria-label="登录">
                         <i class="fa-solid fa-right-to-bracket"></i>
                     </a>
                     <a class="btn btn-primary btn-sm" href="{% url 'accounts:register' %}" aria-label="注册">
