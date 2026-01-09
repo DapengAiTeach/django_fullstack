@@ -1,4 +1,5 @@
 ﻿{% extends "base.html" %}
+{% load static %}
 
 {% block title %}MoviesStore | 注册{% endblock %}
 
@@ -11,7 +12,7 @@
                     <i class="fa-solid fa-user-plus text-primary fs-4"></i>
                     <h2 class="h4 mb-0">创建账号</h2>
                 </div>
-                <p class="text-secondary small mb-4">注册后将自动登录，立即开始探索。</p>
+                <p class="text-secondary small mb-4">注册成功后请使用账号密码登录。</p>
                 <form method="post" novalidate>
                     {% csrf_token %}
                     <div class="mb-3">
@@ -43,7 +44,10 @@
                     </div>
                     <div class="mb-4">
                         <label class="form-label" for="{{ form.captcha.id_for_label }}">验证码</label>
-                        {{ form.captcha }}
+                        <div class="captcha-field d-flex gap-2 align-items-center flex-wrap"
+                             data-refresh-url="{% url 'captcha-refresh' %}">
+                            {{ form.captcha }}
+                        </div>
                         {% if form.captcha.errors %}
                             <div class="invalid-feedback d-block">
                                 {{ form.captcha.errors|striptags }}
@@ -64,4 +68,5 @@
         </div>
     </div>
 </div>
+<script src="{% static 'js/captcha.js' %}"></script>
 {% endblock %}

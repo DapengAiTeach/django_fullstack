@@ -88,3 +88,9 @@ STATICFILES_DIRS = [
 # Auth redirects
 LOGIN_URL = "accounts:login"
 LOGOUT_REDIRECT_URL = "accounts:login"
+
+# Captcha settings
+CAPTCHA_IMAGE_SIZE = (160, 50)
+CAPTCHA_FONT_SIZE = 28
+CAPTCHA_LENGTH = 4
+CAPTCHA_NOISE_FUNCTIONS = ("captcha.helpers.noise_dots",)
