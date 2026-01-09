@@ -37,6 +37,8 @@ body.app-body {
     box-shadow: none;
     background: var(--footer-bg);
     margin: 0;
+    position: relative;
+    z-index: 1030;
 }
 
 .app-footer {
@@ -89,4 +91,8 @@ body.app-body {
 
 [data-bs-theme="dark"] .footer-links .footer-link {
     color: rgba(226, 232, 240, 0.7);
+}
+
+.app-navbar .dropdown-menu {
+    z-index: 1050;
 }
