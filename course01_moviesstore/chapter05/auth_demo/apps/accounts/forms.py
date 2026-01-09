@@ -1,8 +1,10 @@
+import re
+
+from captcha.fields import CaptchaField
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-import re
 
 
 class RegisterForm(UserCreationForm):
@@ -18,6 +20,7 @@ class RegisterForm(UserCreationForm):
         label="确认密码",
         widget=forms.PasswordInput(attrs={"class": "form-control", "placeholder": "请再次输入密码"}),
     )
+    captcha = CaptchaField(label="验证码")
 
     class Meta:
         model = User
@@ -39,6 +42,12 @@ class RegisterForm(UserCreationForm):
         if User.objects.filter(username=username).exists():
             raise ValidationError(self.error_messages["username_exists"])
         return username
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["captcha"].widget.attrs.update(
+            {"class": "form-control", "placeholder": "请输入验证码"}
+        )
 
 
 class LoginForm(AuthenticationForm):
