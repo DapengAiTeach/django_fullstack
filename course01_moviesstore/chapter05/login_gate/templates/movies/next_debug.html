@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Next调试 | Login Gate{% endblock %}
+
+{% block content %}
+<div class="row g-3">
+  <div class="col-12 col-lg-7">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h4 class="mb-2"><i class="fa-solid fa-bug me-2 text-primary"></i>Next 调试页</h4>
+        <p class="text-secondary mb-3">
+          用来辅助你课堂演示：当前访问路径、登录状态、用户名（验证登录态维持是否成功）。
+        </p>
+
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between">
+            <span class="text-secondary">request.path</span>
+            <span class="mono">{{ path }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span class="text-secondary">is_authenticated</span>
+            <span class="mono">{{ is_auth }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span class="text-secondary">username</span>
+            <span class="mono">{{ username }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-5">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h6 class="mb-2"><i class="fa-solid fa-circle-info me-2 text-primary"></i>课堂提醒</h6>
+        <ul class="text-secondary mb-0">
+          <li>未登录访问受保护页：302 → LOGIN_URL</li>
+          <li><span class="mono">next</span> 保存“原目标地址”</li>
+          <li>登录成功后优先回到 <span class="mono">next</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}首页 | Login Gate{% endblock %}
+
+{% block content %}
+<div class="row g-3">
+  <div class="col-12 col-lg-7">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h4 class="mb-2"><i class="fa-solid fa-house me-2 text-primary"></i>登录门禁系统</h4>
+        <p class="text-secondary mb-3">
+          点击 <b>VIP页面</b>，如果你未登录，会被 <span class="mono">@login_required</span> 重定向到登录页并自动携带 <span class="mono">next</span>。
+        </p>
+
+        <div class="d-flex flex-wrap gap-2">
+          <a class="btn btn-brand text-white" href="{% url 'movies:vip' %}">
+            <i class="fa-solid fa-crown me-1"></i>去 VIP 页面（受保护）
+          </a>
+          <a class="btn btn-outline-primary" href="{% url 'movies:next_debug' %}">
+            <i class="fa-solid fa-bug me-1"></i>查看 Next 调试页
+          </a>
+        </div>
+
+        <hr>
+        <div class="text-secondary small">
+          当前状态：
+          {% if user.is_authenticated %}
+            <span class="badge text-bg-success"><i class="fa-solid fa-check me-1"></i>已登录</span>
+          {% else %}
+            <span class="badge text-bg-secondary"><i class="fa-solid fa-xmark me-1"></i>未登录</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-5">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h6 class="mb-2"><i class="fa-solid fa-route me-2 text-primary"></i>未登录重定向流程</h6>
+        <ol class="text-secondary mb-0">
+          <li>访问 <span class="mono">/vip/</span></li>
+          <li>被 302 到 <span class="mono">/accounts/login/?next=/vip/</span></li>
+          <li>登录成功后优先跳回 <span class="mono">next</span></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

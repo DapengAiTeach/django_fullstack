@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>{% block title %}Login Gate{% endblock %}</title>
+
+  <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root{ --brand:#2563eb; --soft:#eff6ff; --border:#e5e7eb; }
+    body{ background: linear-gradient(180deg, var(--soft), #fff 35%); }
+    .navbar{ background:#fff; border-bottom:1px solid var(--border); }
+    .chip{
+      color:var(--brand);
+      background:rgba(37,99,235,.08);
+      border:1px solid rgba(37,99,235,.18);
+      border-radius:999px;
+      padding:.25rem .7rem;
+      font-weight:800;
+    }
+    .card{ border:1px solid var(--border); border-radius:16px; }
+    .btn-brand{ background:var(--brand); border-color:var(--brand); }
+    .btn-brand:hover{ filter:brightness(.95); }
+    footer{ background:#fff; border-top:1px solid var(--border); }
+    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+  </style>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="{% url 'movies:home' %}">
+      <span class="chip"><i class="fa-solid fa-door-open me-1"></i>Login Gate</span>
+      <span class="text-secondary small">login_required + next</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="{% url 'movies:home' %}"><i class="fa-solid fa-house me-1"></i>首页</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'movies:vip' %}"><i class="fa-solid fa-crown me-1"></i>VIP页面</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'movies:next_debug' %}"><i class="fa-solid fa-bug me-1"></i>Next调试</a></li>
+      </ul>
+
+      <div class="d-flex gap-2 align-items-center">
+        {% if user.is_authenticated %}
+          <span class="text-secondary small"><i class="fa-regular fa-user me-1"></i>{{ user.username }}</span>
+          <a class="btn btn-outline-primary btn-sm" href="{% url 'accounts:logout' %}">
+            <i class="fa-solid fa-right-from-bracket me-1"></i>退出
+          </a>
+        {% else %}
+          <a class="btn btn-brand text-white btn-sm" href="{% url 'accounts:login' %}">
+            <i class="fa-solid fa-right-to-bracket me-1"></i>登录
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="flex-grow-1">
+  <div class="container py-4">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} shadow-sm">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+    {% block content %}{% endblock %}
+  </div>
+</main>
+
+<footer class="mt-auto">
+  <div class="container py-3 d-flex flex-wrap justify-content-between align-items-center gap-2">
+    <div class="text-secondary small"><i class="fa-solid fa-lock me-1"></i>Django 登录访问限制实战</div>
+    <div class="text-secondary small"><i class="fa-solid fa-code me-1"></i>Bootstrap5 + FontAwesome6</div>
+  </div>
+</footer>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
