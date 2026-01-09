@@ -12,12 +12,11 @@ class RegisterView(FormView):
     form_class = RegisterForm
 
     def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
+        form.save()
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse("home:home")
+        return reverse("accounts:login")
 
 class UserLogoutView(View):
     def get(self, request, *args, **kwargs):
