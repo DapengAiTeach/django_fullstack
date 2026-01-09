@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'apps.home',
+    "apps.accounts",
 ]
 
 # 中间件配置
