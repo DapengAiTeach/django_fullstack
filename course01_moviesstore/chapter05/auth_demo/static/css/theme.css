@@ -1,3 +1,9 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
 :root {
     color-scheme: light;
     --app-bg: linear-gradient(180deg, #f7f6f2 0%, #ffffff 45%, #eef2f7 100%);
@@ -21,12 +27,16 @@
 body.app-body {
     min-height: 100vh;
     background: var(--app-bg);
+    margin: 0;
+    padding: 0;
     font-family: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 
 .app-navbar {
     border-bottom: 1px solid var(--app-border);
-    box-shadow: var(--app-shadow);
+    box-shadow: none;
+    background: var(--footer-bg);
+    margin: 0;
 }
 
 .app-footer {
@@ -57,11 +67,11 @@ body.app-body {
 @supports (backdrop-filter: blur(12px)) {
     .app-navbar {
         backdrop-filter: blur(12px);
-        background-color: rgba(255, 255, 255, 0.82);
+        background: var(--footer-bg);
     }
 
     [data-bs-theme="dark"] .app-navbar {
-        background-color: rgba(13, 15, 20, 0.78);
+        background: var(--footer-bg);
     }
 
     .app-footer {

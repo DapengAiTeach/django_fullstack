@@ -1,5 +1,5 @@
-﻿<nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary app-navbar">
-    <div class="container">
+<nav class="navbar navbar-expand-lg bg-body-tertiary app-navbar">
+    <div class="container align-items-center">
         <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="/">
             <i class="fa-solid fa-film text-primary"></i>
             MoviesStore
@@ -44,12 +44,8 @@
                         </ul>
                     </div>
                 {% else %}
-                    <a class="btn btn-outline-primary btn-sm" href="{% url 'accounts:login' %}" aria-label="登录">
-                        <i class="fa-solid fa-right-to-bracket"></i>
-                    </a>
-                    <a class="btn btn-primary btn-sm" href="{% url 'accounts:register' %}" aria-label="注册">
-                        <i class="fa-solid fa-user-plus"></i>
-                    </a>
+                    <a class="btn btn-outline-primary btn-sm" href="{% url 'accounts:login' %}">登录</a>
+                    <a class="btn btn-primary btn-sm" href="{% url 'accounts:register' %}">注册</a>
                 {% endif %}
             </div>
         </div>

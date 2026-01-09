@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}MoviesStore | 注册{% endblock %}
+{% block title %}MoviesStore | 娉ㄥ唽{% endblock %}
 
 {% block content %}
 <div class="row justify-content-center">
@@ -9,13 +9,13 @@
             <div class="card-body p-4 p-md-5">
                 <div class="d-flex align-items-center gap-2 mb-3">
                     <i class="fa-solid fa-user-plus text-primary fs-4"></i>
-                    <h2 class="h4 mb-0">创建账号</h2>
+                    <h2 class="h4 mb-0">鍒涘缓璐﹀彿</h2>
                 </div>
-                <p class="text-secondary small mb-4">注册后将自动登录，立即开始探索。</p>
+                <p class="text-secondary small mb-4">娉ㄥ唽鍚庡皢鑷姩鐧诲綍锛岀珛鍗冲紑濮嬫帰绱€?/p>
                 <form method="post" novalidate>
                     {% csrf_token %}
                     <div class="mb-3">
-                        <label class="form-label" for="{{ form.username.id_for_label }}">账号</label>
+                        <label class="form-label" for="{{ form.username.id_for_label }}">璐﹀彿</label>
                         {{ form.username }}
                         {% if form.username.errors %}
                             <div class="invalid-feedback d-block">
@@ -24,7 +24,7 @@
                         {% endif %}
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="{{ form.password1.id_for_label }}">密码</label>
+                        <label class="form-label" for="{{ form.password1.id_for_label }}">瀵嗙爜</label>
                         {{ form.password1 }}
                         {% if form.password1.errors %}
                             <div class="invalid-feedback d-block">
@@ -33,7 +33,7 @@
                         {% endif %}
                     </div>
                     <div class="mb-4">
-                        <label class="form-label" for="{{ form.password2.id_for_label }}">确认密码</label>
+                        <label class="form-label" for="{{ form.password2.id_for_label }}">纭瀵嗙爜</label>
                         {{ form.password2 }}
                         {% if form.password2.errors %}
                             <div class="invalid-feedback d-block">
@@ -47,8 +47,8 @@
                         </div>
                     {% endif %}
                     <div class="d-grid gap-2">
-                        <button class="btn btn-primary btn-lg" type="submit">注册并登录</button>
-                        <a class="btn btn-outline-secondary" href="/">返回首页</a>
+                        <button class="btn btn-primary btn-lg" type="submit">娉ㄥ唽骞剁櫥褰?/button>
+                        <a class="btn btn-outline-secondary" href="/">杩斿洖棣栭〉</a>
                     </div>
                 </form>
             </div>
