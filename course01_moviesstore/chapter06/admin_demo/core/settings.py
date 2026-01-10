@@ -10,6 +10,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # 应用配置
 INSTALLED_APPS = [
+    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -94,3 +95,44 @@ CAPTCHA_IMAGE_SIZE = (160, 50)
 CAPTCHA_FONT_SIZE = 28
 CAPTCHA_LENGTH = 4
 CAPTCHA_NOISE_FUNCTIONS = ("captcha.helpers.noise_dots",)
+
+# Jazzmin admin theme configuration
+JAZZMIN_SETTINGS = {
+    "site_title": "Movies Store Admin",
+    "site_header": "Movies Store",
+    "site_brand": "Movies Store",
+    "site_logo_classes": "img-circle",
+    "welcome_sign": "Welcome to Movies Store Admin",
+    "search_model": ["auth.User"],
+    "topmenu_links": [
+        {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
+    ],
+    "icons": {
+        "auth": "fas fa-users",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users-cog",
+    },
+    "show_sidebar": True,
+    "navigation_expanded": True,
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "theme": "flatly",
+    "navbar": "navbar-dark navbar-primary",
+    "brand_colour": "navbar-primary",
+    "sidebar": "sidebar-dark-primary",
+    "sidebar_nav_child_indent": True,
+    "sidebar_nav_flat_style": True,
+    "navbar_fixed": True,
+    "sidebar_fixed": True,
+    "footer_fixed": False,
+    "small_text": False,
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-outline-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success",
+    },
+}
