@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     "captcha",
     'apps.home',
     "apps.accounts",
+    "apps.movies",
 ]
 
 # 中间件配置
