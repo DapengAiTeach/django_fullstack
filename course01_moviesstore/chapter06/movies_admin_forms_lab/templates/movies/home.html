@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}首页 · Admin Forms Lab{% endblock %}
+
+{% block content %}
+<div class="row g-4 align-items-stretch">
+  <div class="col-lg-7">
+    <div class="card card-soft p-4 h-100">
+      <h3 class="fw-bold mb-2">本章目标：Django Admin 表单系统深度定制</h3>
+      <p class="text-muted mb-4">
+        你将进入 Movie（电影商品）模块，逐个验证：自定义 ModelForm、get_form 动态切换、
+        clean 校验、控件定制、新增/编辑差异、Media 注入脚本联动、以及后端防越权拦截。
+      </p>
+
+      <div class="d-flex gap-2 flex-wrap">
+        <a class="btn btn-tech text-white" href="/admin/">
+          <i class="fa-solid fa-screwdriver-wrench me-1"></i>进入 Django Admin
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-5">
+    <div class="card card-soft p-4 h-100">
+      <h5 class="fw-semibold mb-3"><i class="fa-solid fa-list-check me-2"></i>课堂验证清单</h5>
+      <ul class="mb-0 text-muted">
+        <li>form 绑定自定义 ModelForm（widgets/help_text）</li>
+        <li>get_form：新增/编辑动态切换表单</li>
+        <li>clean_price / clean_discount / clean()</li>
+        <li>新增/编辑差异：编辑态 title 只读</li>
+        <li>Media 注入 JS：实时计算 final_price</li>
+        <li>防越权：risk_level 被抓包提交也会被拦截</li>
+        <li>隐藏字段防篡改：created_by 永远由后端写入</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

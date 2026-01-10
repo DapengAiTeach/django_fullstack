@@ -1,0 +1,7 @@
+/* 轻微美化：让只读字段区域更像“系统计算字段” */
+.field-final_price .readonly {
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(30, 102, 255, 0.06);
+  border: 1px solid rgba(30, 102, 255, 0.18);
+}
