@@ -92,7 +92,8 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 # Auth redirects
 LOGIN_URL = "accounts:login"
-LOGOUT_REDIRECT_URL = "accounts:login"
+LOGIN_REDIRECT_URL = "admin:index"
+LOGOUT_REDIRECT_URL = "admin:login"
 
 # Captcha settings
 CAPTCHA_IMAGE_SIZE = (160, 50)
