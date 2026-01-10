@@ -112,6 +112,9 @@ JAZZMIN_SETTINGS = {
     "topmenu_links": [
         {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
     ],
+    "usermenu_links": [
+        {"name": "前台首页", "url": "/", "permissions": ["auth.view_user"]},
+    ],
     "icons": {
         "auth": "fas fa-users",
         "auth.user": "fas fa-user",
