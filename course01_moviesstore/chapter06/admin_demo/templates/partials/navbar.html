@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary app-navbar">
+    <div class="container align-items-center">
+        <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="/">
+            <i class="fa-solid fa-film text-primary"></i>
+            MoviesStore
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#appNavbar"
+                aria-controls="appNavbar" aria-expanded="false" aria-label="切换导航">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="appNavbar">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/' %}active{% endif %}" aria-current="page" href="/">主页</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path|slice:":7" == "/movies" %}active{% endif %}" href="/movies/">影片</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path|slice:":11" == "/categories" %}active{% endif %}" href="/categories/">分类</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path|slice:":6" == "/about" %}active{% endif %}" href="/about/">关于</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path|slice:":8" == "/contact" %}active{% endif %}" href="/contact/">联系</a>
+                </li>
+            </ul>
+            <div class="d-flex align-items-center gap-2">
+                <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2"
+                        type="button" data-theme-toggle aria-label="切换主题">
+                    <i class="fa-solid fa-moon" data-theme-icon></i>
+                    <span class="d-none d-md-inline">主题</span>
+                </button>
+                {% if user.is_authenticated %}
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false" aria-label="用户菜单">
+                            <i class="fa-solid fa-user"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">个人中心</a></li>
+                            <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">退出登录</a></li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <a class="btn btn-outline-primary btn-sm" href="{% url 'accounts:login' %}">登录</a>
+                    <a class="btn btn-primary btn-sm" href="{% url 'accounts:register' %}">注册</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>
