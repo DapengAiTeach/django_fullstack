@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}注册 · Movies Admin Demo{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <div class="card card-soft p-4">
+      <h4 class="fw-bold mb-1">注册</h4>
+      <p class="text-muted mb-4">注册后可用于前台演示登录，不影响 Admin 的超级用户体系。</p>
+
+      <form method="post" novalidate>
+        {% csrf_token %}
+
+        <div class="mb-3">
+          <label class="form-label">用户名</label>
+          <input type="text" name="username" class="form-control" placeholder="如：dp_admin" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">邮箱</label>
+          <input type="email" name="email" class="form-control" placeholder="可选">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">密码</label>
+          <input type="password" name="password1" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">确认密码</label>
+          <input type="password" name="password2" class="form-control" required>
+        </div>
+
+        {% if form.errors %}
+          <div class="alert alert-danger">
+            {% for field in form %}
+              {% for error in field.errors %}
+                <div>{{ error }}</div>
+              {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+              <div>{{ error }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <button class="btn btn-tech text-white w-100" type="submit">
+          <i class="fa-solid fa-user-plus me-1"></i>创建账号
+        </button>
+
+        <div class="text-center mt-3">
+          <a class="text-decoration-none" href="{% url 'movies:login' %}">已有账号？去登录</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
