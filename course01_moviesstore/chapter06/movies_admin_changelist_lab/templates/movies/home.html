@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}首页 · Changelist Lab{% endblock %}
+
+{% block content %}
+<div class="row g-4 align-items-stretch">
+  <div class="col-lg-7">
+    <div class="card card-soft p-4 h-100">
+      <h3 class="fw-bold mb-2">本章目标：Django Admin 列表页深度定制</h3>
+      <p class="text-muted mb-3">
+        进入 Admin 的「电影(Movie)」列表页，逐个验证：
+        权限裁剪、业务搜索、SimpleListFilter、自定义分页器、外键 N+1 优化、关闭精确 count、
+        以及“图片预览/徽章/颜色/链接/自定义模板”的运营体验增强。
+      </p>
+      <div class="mb-3 text-muted">
+        试试在搜索框输入：
+        <code>g:科幻 d:诺兰 score>=8.5</code> 或 <code>status:3 星际</code> 或 <code>12</code>
+      </div>
+      <a class="btn btn-tech text-white" href="/admin/">
+        <i class="fa-solid fa-screwdriver-wrench me-1"></i>进入 Django Admin
+      </a>
+    </div>
+  </div>
+
+  <div class="col-lg-5">
+    <div class="card card-soft p-4 h-100">
+      <h5 class="fw-semibold mb-3"><i class="fa-solid fa-list-check me-2"></i>Changelist 构成</h5>
+      <ul class="mb-0 text-muted">
+        <li><b>Queryset</b>：get_queryset 权限裁剪/性能</li>
+        <li><b>Filters</b>：list_filter + SimpleListFilter</li>
+        <li><b>Search</b>：get_search_results 业务搜索</li>
+        <li><b>Pagination</b>：paginator + show_full_result_count</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
