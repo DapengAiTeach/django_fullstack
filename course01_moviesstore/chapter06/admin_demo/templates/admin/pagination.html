@@ -1,0 +1,155 @@
+{% load i18n %}
+{% load admin_query %}
+
+{% if pagination_required %}
+<style>
+  .admin-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 0;
+  }
+  .admin-pagination__group {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .admin-pagination__link,
+  .admin-pagination__btn {
+    border: 1px solid #d9dee3;
+    border-radius: 6px;
+    padding: 4px 10px;
+    color: #1f2d3d;
+    background: #fff;
+    text-decoration: none;
+    font-size: 13px;
+  }
+  .admin-pagination__link.is-active {
+    background: #0d6efd;
+    color: #fff;
+    border-color: #0d6efd;
+  }
+  .admin-pagination__btn[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .admin-pagination__select,
+  .admin-pagination__input {
+    border: 1px solid #d9dee3;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 13px;
+    width: 70px;
+  }
+  .admin-pagination__info {
+    color: #6c757d;
+    font-size: 13px;
+  }
+</style>
+
+<nav class="admin-pagination" data-total-pages="{{ cl.paginator.num_pages }}">
+  <div class="admin-pagination__group admin-pagination__info">
+    共 {{ cl.paginator.num_pages }} 页 / {{ cl.result_count }} 条
+  </div>
+
+  <div class="admin-pagination__group">
+    {% if cl.page_num > 0 %}
+      <a class="admin-pagination__link" href="{% admin_query cl 'p' 0 %}">首页</a>
+      <a class="admin-pagination__link" href="{% admin_query cl 'p' cl.page_num|add:'-1' %}">上一页</a>
+    {% else %}
+      <button class="admin-pagination__btn" disabled>首页</button>
+      <button class="admin-pagination__btn" disabled>上一页</button>
+    {% endif %}
+
+    {% for i in cl.paginator.page_range %}
+      {% if i == cl.page_num %}
+        <span class="admin-pagination__link is-active">{{ i|add:'1' }}</span>
+      {% else %}
+        <a class="admin-pagination__link" href="{% admin_query cl 'p' i %}">{{ i|add:'1' }}</a>
+      {% endif %}
+    {% endfor %}
+
+    {% if cl.page_num < cl.paginator.num_pages|add:'-1' %}
+      <a class="admin-pagination__link" href="{% admin_query cl 'p' cl.page_num|add:'1' %}">下一页</a>
+      <a class="admin-pagination__link" href="{% admin_query cl 'p' cl.paginator.num_pages|add:'-1' %}">末页</a>
+    {% else %}
+      <button class="admin-pagination__btn" disabled>下一页</button>
+      <button class="admin-pagination__btn" disabled>末页</button>
+    {% endif %}
+  </div>
+
+  <div class="admin-pagination__group">
+    <label class="admin-pagination__info" for="admin-per-page">每页</label>
+    <select id="admin-per-page" class="admin-pagination__select">
+      {% if "10"|stringformat:"s" == request.GET.per_page|default:cl.list_per_page|stringformat:"s" %}
+        <option value="10" selected>10</option>
+      {% else %}
+        <option value="10">10</option>
+      {% endif %}
+      {% if "20"|stringformat:"s" == request.GET.per_page|default:cl.list_per_page|stringformat:"s" %}
+        <option value="20" selected>20</option>
+      {% else %}
+        <option value="20">20</option>
+      {% endif %}
+      {% if "50"|stringformat:"s" == request.GET.per_page|default:cl.list_per_page|stringformat:"s" %}
+        <option value="50" selected>50</option>
+      {% else %}
+        <option value="50">50</option>
+      {% endif %}
+      {% if "100"|stringformat:"s" == request.GET.per_page|default:cl.list_per_page|stringformat:"s" %}
+        <option value="100" selected>100</option>
+      {% else %}
+        <option value="100">100</option>
+      {% endif %}
+    </select>
+    <span class="admin-pagination__info">条</span>
+  </div>
+
+  <div class="admin-pagination__group">
+    <label class="admin-pagination__info" for="admin-page-input">跳转</label>
+    <input id="admin-page-input" class="admin-pagination__input" type="number" min="1" max="{{ cl.paginator.num_pages }}" value="{{ cl.page_num|add:'1' }}">
+    <button type="button" class="admin-pagination__btn" id="admin-page-go">确定</button>
+  </div>
+</nav>
+
+<script>
+  (function () {
+    var perPageSelect = document.getElementById("admin-per-page");
+    var pageInput = document.getElementById("admin-page-input");
+    var pageGo = document.getElementById("admin-page-go");
+    var totalPages = parseInt(
+      document.querySelector(".admin-pagination").getAttribute("data-total-pages"),
+      10
+    );
+
+    function updateQuery(params) {
+      var url = new URL(window.location.href);
+      Object.keys(params).forEach(function (key) {
+        url.searchParams.set(key, params[key]);
+      });
+      window.location.href = url.toString();
+    }
+
+    if (perPageSelect) {
+      perPageSelect.addEventListener("change", function () {
+        updateQuery({ per_page: perPageSelect.value, p: 0 });
+      });
+    }
+
+    if (pageGo) {
+      pageGo.addEventListener("click", function () {
+        var value = parseInt(pageInput.value, 10);
+        if (!value || value < 1) {
+          value = 1;
+        }
+        if (value > totalPages) {
+          value = totalPages;
+        }
+        updateQuery({ p: value - 1 });
+      });
+    }
+  })();
+</script>
+{% endif %}

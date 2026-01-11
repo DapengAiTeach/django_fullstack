@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'apps.home',
     "apps.accounts",
     "apps.movies",
+    "apps.common",
 ]
 
 # 中间件配置
@@ -150,3 +151,6 @@ JAZZMIN_UI_TWEAKS = {
         "success": "btn-success",
     },
 }
+
+# 启用后台分页自定义逻辑
+from apps.common import admin_pagination  # noqa: F401
