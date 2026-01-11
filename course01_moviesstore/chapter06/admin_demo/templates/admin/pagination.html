@@ -3,49 +3,92 @@
 
 {% if pagination_required %}
 <style>
+  /* 说明：统一 AdminLTE 风格，并强化蓝色主色调，避免按钮与文本显得发灰 */
   .admin-pagination {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    margin: 0 auto;
     padding: 12px 0;
+  }
+  /* 说明：父级可能存在默认左对齐，这里强制居中 */
+  .paginator {
+    text-align: center;
   }
   .admin-pagination__group {
     display: inline-flex;
     align-items: center;
     gap: 6px;
   }
-  .admin-pagination__link,
-  .admin-pagination__btn {
-    border: 1px solid #d9dee3;
-    border-radius: 6px;
-    padding: 4px 10px;
-    color: #1f2d3d;
-    background: #fff;
-    text-decoration: none;
-    font-size: 13px;
-  }
-  .admin-pagination__link.is-active {
-    background: #0d6efd;
-    color: #fff;
-    border-color: #0d6efd;
-  }
-  .admin-pagination__btn[disabled] {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  .admin-pagination__select,
-  .admin-pagination__input {
-    border: 1px solid #d9dee3;
-    border-radius: 6px;
-    padding: 4px 8px;
-    font-size: 13px;
-    width: 70px;
-  }
   .admin-pagination__info {
     color: #6c757d;
     font-size: 13px;
+  }
+  .admin-pagination .btn,
+  .admin-pagination .form-control,
+  .admin-pagination .custom-select {
+    height: 30px;
+    line-height: 1.2;
+    font-size: 13px;
+  }
+  .admin-pagination .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+  }
+  /* 说明：提示文本用 flex 对齐，与控件基线一致 */
+  .admin-pagination__info {
+    display: inline-flex;
+    align-items: center;
+    height: 30px;
+  }
+  /* 说明：label 文本与控件高度一致，避免偏上 */
+  .admin-pagination__group label {
+    display: inline-flex;
+    align-items: center;
+    height: 30px;
+    margin-bottom: 0;
+  }
+  /* 说明：下拉与输入框也用 flex 对齐，避免文字偏移 */
+  .admin-pagination .form-control,
+  .admin-pagination .custom-select {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 8px;
+  }
+  /* 说明：统一按钮为蓝色系（边框、文字、悬停背景） */
+  .admin-pagination .btn-outline-primary {
+    color: #0d6efd;
+    border-color: #0d6efd;
+  }
+  .admin-pagination .btn-outline-primary:hover {
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+  }
+  .admin-pagination .btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+  }
+  /* 说明：输入框与下拉框边框同样跟随主色调 */
+  .admin-pagination .form-control,
+  .admin-pagination .custom-select {
+    border-color: #0d6efd;
+  }
+  .admin-pagination .form-control:focus,
+  .admin-pagination .custom-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+  }
+  .admin-pagination__input {
+    width: 70px;
+  }
+  .admin-pagination__select {
+    width: 70px;
   }
 </style>
 
@@ -56,33 +99,33 @@
 
   <div class="admin-pagination__group">
     {% if cl.page_num > 0 %}
-      <a class="admin-pagination__link" href="{% admin_query cl 'p' 0 %}">首页</a>
-      <a class="admin-pagination__link" href="{% admin_query cl 'p' cl.page_num|add:'-1' %}">上一页</a>
+      <a class="btn btn-outline-primary btn-sm" href="{% admin_query cl 'p' 0 %}">首页</a>
+      <a class="btn btn-outline-primary btn-sm" href="{% admin_query cl 'p' cl.page_num|add:'-1' %}">上一页</a>
     {% else %}
-      <button class="admin-pagination__btn" disabled>首页</button>
-      <button class="admin-pagination__btn" disabled>上一页</button>
+      <button class="btn btn-outline-secondary btn-sm" disabled>首页</button>
+      <button class="btn btn-outline-secondary btn-sm" disabled>上一页</button>
     {% endif %}
 
     {% for i in cl.paginator.page_range %}
       {% if i == cl.page_num %}
-        <span class="admin-pagination__link is-active">{{ i|add:'1' }}</span>
+        <span class="btn btn-primary btn-sm">{{ i|add:'1' }}</span>
       {% else %}
-        <a class="admin-pagination__link" href="{% admin_query cl 'p' i %}">{{ i|add:'1' }}</a>
+        <a class="btn btn-outline-primary btn-sm" href="{% admin_query cl 'p' i %}">{{ i|add:'1' }}</a>
       {% endif %}
     {% endfor %}
 
     {% if cl.page_num < cl.paginator.num_pages|add:'-1' %}
-      <a class="admin-pagination__link" href="{% admin_query cl 'p' cl.page_num|add:'1' %}">下一页</a>
-      <a class="admin-pagination__link" href="{% admin_query cl 'p' cl.paginator.num_pages|add:'-1' %}">末页</a>
+      <a class="btn btn-outline-primary btn-sm" href="{% admin_query cl 'p' cl.page_num|add:'1' %}">下一页</a>
+      <a class="btn btn-outline-primary btn-sm" href="{% admin_query cl 'p' cl.paginator.num_pages|add:'-1' %}">末页</a>
     {% else %}
-      <button class="admin-pagination__btn" disabled>下一页</button>
-      <button class="admin-pagination__btn" disabled>末页</button>
+      <button class="btn btn-outline-secondary btn-sm" disabled>下一页</button>
+      <button class="btn btn-outline-secondary btn-sm" disabled>末页</button>
     {% endif %}
   </div>
 
   <div class="admin-pagination__group">
     <label class="admin-pagination__info" for="admin-per-page">每页</label>
-    <select id="admin-per-page" class="admin-pagination__select">
+    <select id="admin-per-page" class="custom-select custom-select-sm admin-pagination__select">
       {% if "10"|stringformat:"s" == request.GET.per_page|default:cl.list_per_page|stringformat:"s" %}
         <option value="10" selected>10</option>
       {% else %}
@@ -109,8 +152,8 @@
 
   <div class="admin-pagination__group">
     <label class="admin-pagination__info" for="admin-page-input">跳转</label>
-    <input id="admin-page-input" class="admin-pagination__input" type="number" min="1" max="{{ cl.paginator.num_pages }}" value="{{ cl.page_num|add:'1' }}">
-    <button type="button" class="admin-pagination__btn" id="admin-page-go">确定</button>
+    <input id="admin-page-input" class="form-control form-control-sm admin-pagination__input" type="number" min="1" max="{{ cl.paginator.num_pages }}" value="{{ cl.page_num|add:'1' }}">
+    <button type="button" class="btn btn-outline-primary btn-sm" id="admin-page-go">确定</button>
   </div>
 </nav>
 
