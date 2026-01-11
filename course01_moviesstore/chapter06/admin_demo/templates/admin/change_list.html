@@ -104,8 +104,24 @@
                                    class="admin-checkbox">
                         </td>
                         {% endif %}
-                        {% for item in result %}
-                        <td>{{ item }}</td>
+                        {% for field_name in cl.list_display %}
+                        <td>
+                            {% if forloop.first %}
+                                <a href="{% url opts|admin_urlname:'change' result.pk %}">
+                                    {% if field_name == '__str__' %}
+                                        {{ result }}
+                                    {% else %}
+                                        {{ result|get_field_value:field_name|default:'' }}
+                                    {% endif %}
+                                </a>
+                            {% else %}
+                                {% if field_name == '__str__' %}
+                                    {{ result }}
+                                {% else %}
+                                    {{ result|get_field_value:field_name|default:'' }}
+                                {% endif %}
+                            {% endif %}
+                        </td>
                         {% endfor %}
                     </tr>
                     {% endfor %}

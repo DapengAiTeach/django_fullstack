@@ -115,6 +115,26 @@ def admin_action_flag(flag_value):
 
 
 @register.filter
+def get_field_value(obj, field_name):
+    """
+    获取对象的字段值
+
+    用法:
+    {{ object|get_field_value:'field_name' }}
+    """
+    try:
+        if hasattr(obj, field_name):
+            value = getattr(obj, field_name, '')
+            # 如果是可调用的，调用它
+            if callable(value):
+                return value()
+            return value
+        return ''
+    except (AttributeError, TypeError):
+        return ''
+
+
+@register.filter
 def get_admin_link(model):
     """
     获取模型的 admin 变更列表链接
