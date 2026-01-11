@@ -1,0 +1,110 @@
+{% extends 'admin/base.html' %}
+{% load i18n admin_urls static %}
+
+{% block title %}{{ opts.verbose_name }} - Movies Store Admin{% endblock %}
+{% block title_tag %}
+    {% if add %}
+        {% trans "添加" %} {{ opts.verbose_name }}
+    {% else %}
+        {{ object }}
+    {% endif %}
+{% endblock %}
+
+{% block content_inner %}
+<form method="post" class="admin-form" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <!-- Messages -->
+    {% if form.non_field_errors %}
+    <div class="alert alert-danger" role="alert">
+        {{ form.non_field_errors }}
+    </div>
+    {% endif %}
+
+    <!-- Fieldsets -->
+    <div class="card mb-3">
+        {% for fieldset in adminform %}
+        <div class="fieldset">
+            {% if fieldset.name %}
+            <h5 class="card-header bg-light">{{ fieldset.name }}</h5>
+            {% endif %}
+            <div class="card-body">
+                {% for line in fieldset %}
+                <div class="mb-3">
+                    {{ line.label_tag }}
+                    {% if line.field.field.widget.input_type == 'hidden' %}
+                        {{ line.field }}
+                    {% else %}
+                        {% if line.field.errors %}
+                        <div class="is-invalid">
+                            {{ line.field }}
+                            <div class="invalid-feedback d-block">
+                                {{ line.field.errors }}
+                            </div>
+                        </div>
+                        {% else %}
+                        {{ line.field }}
+                        {% endif %}
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Inlines -->
+    {% if inline_admin_formsets %}
+    <div class="card mb-3">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">{% trans "相关项目" %}</h5>
+        </div>
+        <div class="card-body">
+            {% for inline_admin_formset in inline_admin_formsets %}
+            <div class="inline-fieldset mb-4">
+                <h6>{{ inline_admin_formset.formset.model._meta.verbose_name_plural }}</h6>
+                {{ inline_admin_formset.formset.management_form }}
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                        <tr>
+                            {% for field in inline_admin_formset.formset.form.base_fields %}
+                            <th>{{ field }}</th>
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for form in inline_admin_formset.formset %}
+                        <tr>
+                            {% for field in form %}
+                            <td>{{ field }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Submit buttons -->
+    <div class="form-group">
+        <div class="btn-group" role="group">
+            <button type="submit" name="_save" class="btn btn-primary">
+                <i class="fas fa-save"></i> {% trans "保存" %}
+            </button>
+            {% if not add %}
+            <button type="submit" name="_addanother" class="btn btn-secondary">
+                <i class="fas fa-plus"></i> {% trans "保存并继续编辑" %}
+            </button>
+            {% endif %}
+            <a href="{% url opts|admin_urlname:'changelist' %}" class="btn btn-secondary">
+                <i class="fas fa-times"></i> {% trans "取消" %}
+            </a>
+        </div>
+    </div>
+</form>
+{% endblock %}

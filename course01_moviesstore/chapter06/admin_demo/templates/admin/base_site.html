@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Movies Store Admin{% endblock %}</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap5/css/bootstrap.min.css' %}">
+    <!-- FontAwesome 6 CSS -->
+    <link rel="stylesheet" href="{% static 'fontawesome6/css/all.min.css' %}">
+    <!-- Custom theme CSS -->
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}">
+    <!-- Admin custom CSS -->
+    <link rel="stylesheet" href="{% static 'admin/css/admin-custom.css' %}">
+
+    {% block extrastyle %}{% endblock %}
+</head>
+<body>
+    <!-- Main wrapper -->
+    <div class="admin-wrapper d-flex">
+        <!-- Sidebar -->
+        <div class="admin-sidebar">
+            {% include 'admin/includes/sidebar.html' %}
+        </div>
+
+        <!-- Main content area -->
+        <div class="admin-content flex-fill">
+            <!-- Top navbar -->
+            <nav class="admin-navbar">
+                {% include 'admin/includes/navbar.html' %}
+            </nav>
+
+            <!-- Messages -->
+            {% if messages %}
+                {% include 'admin/includes/messages.html' %}
+            {% endif %}
+
+            <!-- Breadcrumb -->
+            {% if cl %}
+                {% include 'admin/includes/breadcrumb.html' %}
+            {% endif %}
+
+            <!-- Page content -->
+            <div class="admin-page-container">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="{% static 'bootstrap5/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- Theme JS -->
+    <script src="{% static 'js/theme.js' %}"></script>
+    <!-- Admin custom JS -->
+    <script src="{% static 'admin/js/admin-custom.js' %}"></script>
+
+    {% block extrascript %}{% endblock %}
+</body>
+</html>
