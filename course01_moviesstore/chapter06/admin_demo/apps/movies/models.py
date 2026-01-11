@@ -71,7 +71,7 @@ class Movie(models.Model):
     douban_votes = models.PositiveIntegerField("豆瓣评分人数", blank=True, null=True)
     duration_minutes = models.PositiveSmallIntegerField("片长(分钟)")
     summary = models.TextField("简介", blank=True)
-    cover = models.ImageField("封面", upload_to="movies/covers/")
+    cover = models.ImageField("封面", upload_to="movies/covers/", blank=True, null=True)
     price = models.DecimalField("价格", max_digits=8, decimal_places=2)
     stock = models.PositiveIntegerField("库存", default=0)
     is_on_sale = models.BooleanField("是否上架", default=True)
