@@ -59,33 +59,41 @@ def get_app_list():
     ]
     """
     app_list = []
+    app_list_dict = {}
 
-    for model, admin_instance in django_admin.site._registry.items():
-        app_label = model._meta.app_label
+    try:
+        for model, admin_instance in django_admin.site._registry.items():
+            app_label = model._meta.app_label
 
-        # 找到或创建应用条目
-        app_entry = next(
-            (app for app in app_list if app['app_label'] == app_label),
-            None
-        )
+            # 找到或创建应用条目
+            if app_label not in app_list_dict:
+                try:
+                    app_config = apps.get_app_config(app_label)
+                    app_entry = {
+                        'name': app_config.verbose_name,
+                        'app_label': app_label,
+                        'models': []
+                    }
+                    app_list_dict[app_label] = app_entry
+                    app_list.append(app_entry)
+                except (LookupError, RuntimeError):
+                    # App not found or not ready
+                    continue
 
-        if app_entry is None:
-            app_config = apps.get_app_config(app_label)
-            app_entry = {
-                'name': app_config.verbose_name,
-                'app_label': app_label,
-                'models': []
+            app_entry = app_list_dict[app_label]
+
+            # 添加模型
+            model_key = f"{app_label}.{model.__name__}".lower()
+            model_entry = {
+                'name': model._meta.verbose_name_plural,
+                'admin_url': f"/admin/{app_label}/{model._meta.model_name}/",
+                'icon': ADMIN_ICONS.get(model_key, 'fas fa-cube'),
             }
-            app_list.append(app_entry)
+            app_entry['models'].append(model_entry)
 
-        # 添加模型
-        model_key = f"{app_label}.{model.__name__}".lower()
-        model_entry = {
-            'name': model._meta.verbose_name_plural,
-            'admin_url': f"/admin/{app_label}/{model._meta.model_name}/",
-            'icon': ADMIN_ICONS.get(model_key, 'fas fa-cube'),
-        }
-        app_entry['models'].append(model_entry)
+    except Exception:
+        # Return empty list if there's any error
+        pass
 
     return app_list
 

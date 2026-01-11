@@ -37,13 +37,12 @@
                 {% include 'admin/includes/messages.html' %}
             {% endif %}
 
-            <!-- Breadcrumb -->
-            {% if cl %}
-                {% include 'admin/includes/breadcrumb.html' %}
-            {% endif %}
-
-            <!-- Page content -->
+            <!-- Main container -->
             <div class="admin-page-container">
+                <!-- Breadcrumb -->
+                {% include 'admin/includes/breadcrumb.html' %}
+
+                <!-- Page content -->
                 {% block content %}{% endblock %}
             </div>
         </div>

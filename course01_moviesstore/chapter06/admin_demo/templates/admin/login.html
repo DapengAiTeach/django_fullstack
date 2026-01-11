@@ -134,16 +134,20 @@
             </ul>
             {% endif %}
 
-            <!-- Username -->
+        <!-- Username -->
             <div class="form-group">
                 <label for="id_username" class="form-label">
                     <i class="fas fa-user"></i> {% trans "用户名" %}
                 </label>
-                {{ form.username }}
-                {% if form.username.errors %}
-                <div class="text-danger small mt-1">
-                    {{ form.username.errors.0 }}
-                </div>
+                {% if form.username %}
+                    {% if form.username.errors %}
+                        <input type="text" class="form-control is-invalid" id="id_username" name="username" placeholder="{% trans '用户名' %}" value="{{ form.username.value|default:'' }}" required>
+                        <div class="invalid-feedback d-block">
+                            {{ form.username.errors.0 }}
+                        </div>
+                    {% else %}
+                        <input type="text" class="form-control" id="id_username" name="username" placeholder="{% trans '用户名' %}" value="{{ form.username.value|default:'' }}" required>
+                    {% endif %}
                 {% endif %}
             </div>
 
@@ -152,11 +156,15 @@
                 <label for="id_password" class="form-label">
                     <i class="fas fa-lock"></i> {% trans "密码" %}
                 </label>
-                {{ form.password }}
-                {% if form.password.errors %}
-                <div class="text-danger small mt-1">
-                    {{ form.password.errors.0 }}
-                </div>
+                {% if form.password %}
+                    {% if form.password.errors %}
+                        <input type="password" class="form-control is-invalid" id="id_password" name="password" placeholder="{% trans '密码' %}" required>
+                        <div class="invalid-feedback d-block">
+                            {{ form.password.errors.0 }}
+                        </div>
+                    {% else %}
+                        <input type="password" class="form-control" id="id_password" name="password" placeholder="{% trans '密码' %}" required>
+                    {% endif %}
                 {% endif %}
             </div>
 
