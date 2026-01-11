@@ -246,15 +246,66 @@ body {
     border-bottom: 1px solid #dee2e6;
 }
 
-.checkbox-column {
-    width: 50px;
-    text-align: center;
+/* Compact table for list views */
+.admin-compact-table {
+    margin-bottom: 0;
+    font-size: 0.85rem;
 }
 
-.checkbox-column input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
+.admin-compact-table thead {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.admin-compact-table th {
+    font-weight: 600;
+    color: #495057;
+    padding: 8px 10px;
+    vertical-align: middle;
+    white-space: nowrap;
+    font-size: 0.85rem;
+}
+
+.admin-compact-table th.sortable a {
+    color: #0f766e;
+    text-decoration: none;
+}
+
+.admin-compact-table th.sortable a:hover {
+    text-decoration: underline;
+}
+
+.admin-compact-table tbody tr {
+    transition: var(--admin-transition);
+}
+
+.admin-compact-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.admin-compact-table td {
+    padding: 6px 10px;
+    vertical-align: middle;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.admin-compact-table td.checkbox-column {
+    text-align: center;
+    width: 40px;
+}
+
+.admin-compact-table td.field-first {
+    font-weight: 500;
+}
+
+.admin-compact-table .field-link {
+    color: #0f766e;
+    text-decoration: none;
+}
+
+.admin-compact-table .field-link:hover {
+    color: #0d9488;
+    text-decoration: underline;
 }
 
 /* ============================================
@@ -467,6 +518,59 @@ body {
 .filter-section a.active {
     color: #0f766e;
     font-weight: 600;
+}
+
+/* Improved filter card styling */
+.filter-card {
+    padding: 12px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+}
+
+.filter-card .filter-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #495057;
+    margin: 0 0 10px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.filter-card .filter-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.filter-card .filter-list li {
+    margin-bottom: 6px;
+}
+
+.filter-card .filter-item {
+    display: flex;
+    align-items: center;
+    padding: 6px 8px;
+    color: #495057;
+    text-decoration: none;
+    border-radius: 3px;
+    font-size: 0.85rem;
+    transition: var(--admin-transition);
+}
+
+.filter-card .filter-item:hover {
+    background-color: #e9ecef;
+    color: #0f766e;
+}
+
+.filter-card .filter-item.active {
+    background-color: #d1fae5;
+    color: #0f766e;
+    font-weight: 500;
+}
+
+.filter-card .filter-label {
+    flex: 1;
 }
 
 /* ============================================
