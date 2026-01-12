@@ -11,6 +11,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Admin UI（必须在 django.contrib.admin 之前）
+    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -49,7 +51,7 @@ ROOT_URLCONF = "config.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -86,16 +88,16 @@ REDIS_URL = f"redis://{os.getenv('REDIS_HOST')}:{os.getenv('REDIS_PORT')}/{os.ge
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.movie_auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        "NAME": "django.contrib.movie_auth.password_validation.MinimumLengthValidator",
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        "NAME": "django.contrib.movie_auth.password_validation.CommonPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        "NAME": "django.contrib.movie_auth.password_validation.NumericPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
@@ -104,13 +106,32 @@ LANGUAGE_CODE = "zh-hans"
 TIME_ZONE = "Asia/Shanghai"
 USE_I18N = True
 USE_TZ = True
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-
 STATIC_URL = "static/"
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# jazzmin 后台系统配置
+JAZZMIN_SETTINGS = {
+    "site_title": "电影商城后台",
+    "site_header": "数字电影商城",
+    "site_brand": "MovieStore Admin",
+    "welcome_sign": "欢迎进入数字电影商城管理后台",
+    "copyright": "大鹏AI教育",
+
+    "search_model": [
+        "content.Movie",
+        "movie_auth.UserIdentity",
+    ],
+
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "accounts": "fas fa-user",
+        "content": "fas fa-film",
+        "wallet": "fas fa-wallet",
+        "orders": "fas fa-shopping-cart",
+        "membership": "fas fa-id-card",
+        "download": "fas fa-download",
+    },
+
+    "show_sidebar": True,
+    "navigation_expanded": True,
+}

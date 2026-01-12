@@ -1,0 +1,46 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block content %}
+  <div class="container-fluid">
+    <h1>管理员金币调整</h1>
+
+    <div class="card mt-3">
+      <div class="card-body">
+        <p><strong>用户：</strong>{{ wallet.user }}</p>
+        <p><strong>当前余额：</strong>{{ wallet.balance }}</p>
+      </div>
+    </div>
+
+    <div class="card mt-3">
+      <div class="card-body">
+        <form method="post" novalidate>
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label class="form-label">{{ form.action.label }}</label>
+            {{ form.action }}
+            {% if form.action.errors %}<div class="text-danger">{{ form.action.errors }}</div>{% endif %}
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">{{ form.amount.label }}</label>
+            {{ form.amount }}
+            <div class="form-text">{{ form.amount.help_text }}</div>
+            {% if form.amount.errors %}<div class="text-danger">{{ form.amount.errors }}</div>{% endif %}
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">{{ form.remark.label }}</label>
+            {{ form.remark }}
+            <div class="form-text">{{ form.remark.help_text }}</div>
+            {% if form.remark.errors %}<div class="text-danger">{{ form.remark.errors }}</div>{% endif %}
+          </div>
+
+          <button type="submit" class="btn btn-primary">确认提交</button>
+          <a class="btn btn-secondary" href="{% url 'admin:wallet_wallet_change' wallet.id %}">返回钱包</a>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
