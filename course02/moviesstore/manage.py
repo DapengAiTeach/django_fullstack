@@ -15,6 +15,9 @@ def main():
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
+    # 自动为测试命令添加 --keepdb 选项
+    if len(sys.argv) > 1 and sys.argv[1] == 'test' and '--keepdb' not in sys.argv:
+        sys.argv.append('--keepdb')
     execute_from_command_line(sys.argv)
 
 

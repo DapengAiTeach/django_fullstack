@@ -82,7 +82,6 @@ class OrderService:
             user=user,
             total_coin=total_coin,
             status=PurchaseOrder.Status.CREATED,
-            remark=remark or "",
         )
 
         PurchaseOrderItem.objects.bulk_create(

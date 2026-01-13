@@ -12,7 +12,7 @@ def create_order(
     user,
     movies: Iterable,
     price_coin_map: dict | None = None,
-    remark: str | None = None,
+    
 ) -> PurchaseOrder:
     """
     创建订单（测试工厂，不扣款、不授权）
@@ -57,7 +57,7 @@ def create_order(
     order = OrderService.create_order(
         user=user,
         items=items,
-        remark=remark or "测试订单",
+
     )
     return order
 

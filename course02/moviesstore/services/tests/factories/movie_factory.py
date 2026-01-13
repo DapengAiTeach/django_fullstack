@@ -4,7 +4,7 @@ from __future__ import annotations
 import uuid
 from typing import Optional
 
-from apps.movies.models import Movie
+from apps.content.models import Movie
 
 
 def _unique_title(prefix: str = "测试电影") -> str:
@@ -45,8 +45,8 @@ def create_movie(
     data = {
         "title": title or _unique_title(),
         "price_coin": price_coin,
-        "year": year,
-        "is_active": is_active,
+        "release_year": year,
+        "status": status or Movie.Status.ONLINE,
     }
 
     if status is not None:
@@ -70,7 +70,7 @@ def create_onsale_movie(
     return create_movie(
         title=title,
         price_coin=price_coin,
-        status=Movie.Status.ONSALE,
+        status=Movie.Status.ONLINE,
         **extra_fields,
     )
 
