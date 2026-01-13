@@ -8,13 +8,22 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from . import views
 
 # URL模式列表
 # Django会按照列表顺序匹配URL，找到第一个匹配的就会停止
 urlpatterns = [
+    # 首页路由
+    # 访问 / 会显示首页
+    path('', views.index_view, name='index'),
+
     # Django管理后台路由
     # 访问 /admin/ 会进入Django内置的管理后台
     path('admin/', admin.site.urls),
+
+    # 用户应用路由
+    # 包含注册、登录、登出、个人信息等URL
+    path('users/', include('apps.users.urls', namespace='users')),
 
     # Django内置认证路由
     # 包含登录、登出、密码重置等URL
@@ -23,7 +32,6 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')),
 
     # 后续会添加自定义应用的路由：
-    # path('users/', include('apps.users.urls', namespace='users')),      # 用户应用路由
     # path('movies/', include('apps.movies.urls', namespace='movies')),    # 电影应用路由
     # path('orders/', include('apps.orders.urls', namespace='orders')),    # 订单应用路由
     # path('coins/', include('apps.coins.urls', namespace='coins')),      # 金币应用路由

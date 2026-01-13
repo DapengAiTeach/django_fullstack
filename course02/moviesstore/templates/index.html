@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}首页 - 电影商城{% endblock %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1 class="display-4 fw-bold">
+        <i class="fas fa-film text-primary me-2"></i>欢迎来到电影商城
+    </h1>
+    <p class="lead text-muted">发现精彩电影，享受观影乐趣</p>
+</div>
+
+<!-- 功能介绍 -->
+<div class="row mb-5">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow border-0">
+            <div class="card-body text-center">
+                <i class="fas fa-film fa-3x text-primary mb-3"></i>
+                <h5 class="card-title">海量电影</h5>
+                <p class="card-text text-muted">收录各类精彩电影，满足您的观影需求</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow border-0">
+            <div class="card-body text-center">
+                <i class="fas fa-play-circle fa-3x text-success mb-3"></i>
+                <h5 class="card-title">在线观看</h5>
+                <p class="card-text text-muted">随时随地在线观看，无需下载</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow border-0">
+            <div class="card-body text-center">
+                <i class="fas fa-coins fa-3x text-warning mb-3"></i>
+                <h5 class="card-title">金币支付</h5>
+                <p class="card-text text-muted">金币支付，安全便捷</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 用户操作 -->
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow border-0">
+            <div class="card-body text-center py-5">
+                {% if user.is_authenticated %}
+                    <h4 class="mb-4">
+                        <i class="fas fa-user-check text-success me-2"></i>欢迎回来，{{ user.username }}！
+                    </h4>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                        <a href="/movies/" class="btn btn-primary btn-lg">
+                            <i class="fas fa-film me-1"></i>浏览电影
+                        </a>
+                        <a href="{% url 'users:profile' %}" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-user me-1"></i>个人中心
+                        </a>
+                    </div>
+                {% else %}
+                    <h4 class="mb-4">
+                        <i class="fas fa-user-plus text-primary me-2"></i>开始您的观影之旅
+                    </h4>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                        <a href="{% url 'users:register' %}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-user-plus me-1"></i>立即注册
+                        </a>
+                        <a href="{% url 'users:login' %}" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-sign-in-alt me-1"></i>立即登录
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

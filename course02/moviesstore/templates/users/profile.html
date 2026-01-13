@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+
+{% block title %}个人信息 - 电影商城{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-3">
+        <!-- 用户信息卡片 -->
+        <div class="card shadow mb-4">
+            <div class="card-body text-center">
+                <!-- 头像 -->
+                {% if user.avatar %}
+                    <img src="{{ user.avatar.url }}" alt="头像" class="avatar-large mb-3">
+                {% else %}
+                    <i class="fas fa-user-circle fa-5x text-secondary mb-3"></i>
+                {% endif %}
+                
+                <!-- 用户名 -->
+                <h5 class="card-title">{{ user.username }}</h5>
+                
+                <!-- 邮箱 -->
+                <p class="card-text text-muted">
+                    <i class="fas fa-envelope me-1"></i>{{ user.email }}
+                </p>
+                
+                <!-- 手机号 -->
+                {% if user.phone %}
+                    <p class="card-text text-muted">
+                        <i class="fas fa-phone me-1"></i>{{ user.phone }}
+                    </p>
+                {% endif %}
+                
+                <!-- 注册时间 -->
+                <p class="card-text text-muted">
+                    <small>
+                        <i class="fas fa-calendar me-1"></i>注册时间：{{ user.date_joined|date:"Y-m-d" }}
+                    </small>
+                </p>
+            </div>
+        </div>
+        
+        <!-- 用户配置信息 -->
+        <div class="card shadow">
+            <div class="card-header">
+                <h6 class="mb-0">账户信息</h6>
+            </div>
+            <div class="card-body">
+                <!-- 金币余额 -->
+                <div class="mb-3">
+                    <i class="fas fa-coins text-warning me-2"></i>
+                    <strong>金币余额：</strong>
+                    <span class="badge bg-warning">{{ user.coins }}</span>
+                </div>
+                
+                <!-- 会员等级 -->
+                <div class="mb-3">
+                    <i class="fas fa-crown text-warning me-2"></i>
+                    <strong>会员等级：</strong>
+                    {% if user.member_level == 'normal' %}
+                        <span class="badge bg-secondary">普通会员</span>
+                    {% elif user.member_level == 'vip' %}
+                        <span class="badge bg-warning">VIP会员</span>
+                    {% elif user.member_level == 'svip' %}
+                        <span class="badge bg-danger">SVIP会员</span>
+                    {% endif %}
+                </div>
+                
+                <!-- 会员到期时间 -->
+                {% if user.member_expire_at %}
+                    <div>
+                        <i class="fas fa-clock text-warning me-2"></i>
+                        <strong>会员到期：</strong>
+                        {{ user.member_expire_at|date:"Y-m-d H:i" }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-9">
+        <!-- 编辑个人信息表单 -->
+        <div class="card shadow">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-user-edit me-2"></i>编辑个人信息
+                </h5>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <!-- 头像 -->
+                    <div class="mb-3">
+                        <label for="avatar" class="form-label">
+                            <i class="fas fa-image me-1"></i>头像
+                        </label>
+                        <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*">
+                        {% if user.avatar %}
+                            <div class="mt-2">
+                                <small class="text-muted">当前头像：</small>
+                                <img src="{{ user.avatar.url }}" alt="当前头像" class="avatar-small ms-2">
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- 生日 -->
+                    <div class="mb-3">
+                        <label for="birthday" class="form-label">
+                            <i class="fas fa-birthday-cake me-1"></i>生日
+                        </label>
+                        <input type="date" class="form-control" id="birthday" name="birthday" value="{% if user.birthday %}{{ user.birthday|date:'Y-m-d' }}{% endif %}">
+                    </div>
+                    
+                    <!-- 性别 -->
+                    <div class="mb-3">
+                        <label for="gender" class="form-label">
+                            <i class="fas fa-venus-mars me-1"></i>性别
+                        </label>
+                        <select class="form-select" id="gender" name="gender">
+                            <option value="male" {% if user.gender == 'male' %}selected{% endif %}>男</option>
+                            <option value="female" {% if user.gender == 'female' %}selected{% endif %}>女</option>
+                            <option value="secret" {% if user.gender == 'secret' %}selected{% endif %}>保密</option>
+                        </select>
+                    </div>
+                    
+                    <!-- 个人简介 -->
+                    <div class="mb-3">
+                        <label for="bio" class="form-label">
+                            <i class="fas fa-info-circle me-1"></i>个人简介
+                        </label>
+                        <textarea class="form-control" id="bio" name="bio" rows="4" placeholder="请输入个人简介（最多500字）">{{ user.bio }}</textarea>
+                    </div>
+                    
+                    <!-- 提交按钮 -->
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-1"></i>保存修改
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .avatar-large {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #dee2e6;
+    }
+    .avatar-small {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+</style>
+{% endblock %}

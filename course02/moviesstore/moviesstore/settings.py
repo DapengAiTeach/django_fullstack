@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',         # 会话框架
     'django.contrib.messages',         # 消息框架（用于显示提示信息）
     'django.contrib.staticfiles',      # 静态文件管理
-    # 后续会添加自定义应用：
-    # 'apps.users',                  # 用户应用
+    # 自定义应用：
+    'apps.users.apps.UsersConfig',    # 用户应用
     # 'apps.movies',                 # 电影应用
     # 'apps.orders',                 # 订单应用
     # 'apps.coins',                  # 金币应用
@@ -165,6 +165,11 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # 指定模型中AutoField的默认类型
 # BigAutoField使用64位整数，支持更大的ID范围
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# 自定义用户模型
+# 指定使用自定义的User模型，而不是Django默认的User模型
+# 格式：'app_label.ModelName'
+AUTH_USER_MODEL = 'users.User'
 
 # 登录URL
 # 用户需要登录时重定向到的URL
