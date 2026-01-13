@@ -1,11 +1,8 @@
 from django.contrib import admin
-from django.urls import path
-
-# 首页视图函数
-from .views import home
+from django.urls import path, include
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    # 首页路由，访问根路径时，调用home视图函数
-    path("", home, name="home"),
+    # 电影应用路由，访问/movies/路径时，包含movies应用的URL路由
+    path("movies/", include("movies.urls")),
 ]
