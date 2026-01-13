@@ -1,80 +1,338 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}首页 - 电影商城{% endblock %}
 
+{% block extra_css %}
+<link href="{% static 'css/index.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
-<div class="text-center mb-5">
-    <h1 class="display-4 fw-bold">
-        <i class="fas fa-film text-primary me-2"></i>欢迎来到电影商城
-    </h1>
-    <p class="lead text-muted">发现精彩电影，享受观影乐趣</p>
-</div>
+<!-- Hero Banner -->
+<section class="hero-banner">
+    <div class="hero-content">
+        <h1 class="hero-title">发现精彩电影</h1>
+        <p class="hero-subtitle">海量高清影片，随时随地畅享</p>
+        <a href="/movies/" class="hero-cta">
+            <i class="fas fa-play me-2"></i>立即观看
+        </a>
+    </div>
+</section>
 
-<!-- 功能介绍 -->
-<div class="row mb-5">
-    <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow border-0">
-            <div class="card-body text-center">
-                <i class="fas fa-film fa-3x text-primary mb-3"></i>
-                <h5 class="card-title">海量电影</h5>
-                <p class="card-text text-muted">收录各类精彩电影，满足您的观影需求</p>
-            </div>
-        </div>
+<!-- 热门推荐 -->
+<section class="container py-5">
+    <div class="section-header">
+        <h2>
+            <i class="fas fa-fire text-warning me-2"></i>热门推荐
+        </h2>
+        <a href="/movies/?sort=hot" class="view-more-btn">
+            查看更多 <i class="fas fa-arrow-right ms-1"></i>
+        </a>
     </div>
     
-    <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow border-0">
-            <div class="card-body text-center">
-                <i class="fas fa-play-circle fa-3x text-success mb-3"></i>
-                <h5 class="card-title">在线观看</h5>
-                <p class="card-text text-muted">随时随地在线观看，无需下载</p>
+    <div class="hot-movies">
+        <!-- 电影卡片 1 -->
+        <div class="movie-card movie-card-horizontal">
+            <div class="movie-poster">
+                <img src="https://www.dmoe.cc/random.php" alt="电影海报">
+                <div class="play-button">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+            <div class="movie-overlay">
+                <h3 class="movie-title">复仇者联盟</h3>
+                <div class="movie-info">
+                    <div class="movie-rating">
+                        <i class="fas fa-star"></i>
+                        <span>9.2</span>
+                    </div>
+                    <span><i class="fas fa-clock me-1"></i>2h 32m</span>
+                    <span><i class="fas fa-calendar me-1"></i>2024</span>
+                </div>
             </div>
         </div>
+        
+        <!-- 电影卡片 2 -->
+        <div class="movie-card movie-card-horizontal">
+            <div class="movie-poster">
+                <img src="https://www.dmoe.cc/random.php" alt="电影海报">
+                <div class="play-button">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+            <div class="movie-overlay">
+                <h3 class="movie-title">星际穿越</h3>
+                <div class="movie-info">
+                    <div class="movie-rating">
+                        <i class="fas fa-star"></i>
+                        <span>9.5</span>
+                    </div>
+                    <span><i class="fas fa-clock me-1"></i>2h 49m</span>
+                    <span><i class="fas fa-calendar me-1"></i>2014</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 电影卡片 3 -->
+        <div class="movie-card movie-card-horizontal">
+            <div class="movie-poster">
+                <img src="https://www.dmoe.cc/random.php" alt="电影海报">
+                <div class="play-button">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+            <div class="movie-overlay">
+                <h3 class="movie-title">盗梦空间</h3>
+                <div class="movie-info">
+                    <div class="movie-rating">
+                        <i class="fas fa-star"></i>
+                        <span>9.0</span>
+                    </div>
+                    <span><i class="fas fa-clock me-1"></i>2h 28m</span>
+                    <span><i class="fas fa-calendar me-1"></i>2010</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 电影卡片 4 -->
+        <div class="movie-card movie-card-horizontal">
+            <div class="movie-poster">
+                <img src="https://www.dmoe.cc/random.php" alt="电影海报">
+                <div class="play-button">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+            <div class="movie-overlay">
+                <h3 class="movie-title">阿凡达</h3>
+                <div class="movie-info">
+                    <div class="movie-rating">
+                        <i class="fas fa-star"></i>
+                        <span>8.8</span>
+                    </div>
+                    <span><i class="fas fa-clock me-1"></i>2h 42m</span>
+                    <span><i class="fas fa-calendar me-1"></i>2009</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 电影卡片 5 -->
+        <div class="movie-card movie-card-horizontal">
+            <div class="movie-poster">
+                <img src="https://www.dmoe.cc/random.php" alt="电影海报">
+                <div class="play-button">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+            <div class="movie-overlay">
+                <h3 class="movie-title">泰坦尼克号</h3>
+                <div class="movie-info">
+                    <div class="movie-rating">
+                        <i class="fas fa-star"></i>
+                        <span>8.9</span>
+                    </div>
+                    <span><i class="fas fa-clock me-1"></i>3h 14m</span>
+                    <span><i class="fas fa-calendar me-1"></i>1997</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 最新上映 -->
+<section class="container py-5">
+    <div class="section-header">
+        <h2>
+            <i class="fas fa-film me-2"></i>最新上映
+        </h2>
+        <a href="/movies/?sort=new" class="view-more-btn">
+            查看更多 <i class="fas fa-arrow-right ms-1"></i>
+        </a>
     </div>
     
-    <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow border-0">
-            <div class="card-body text-center">
-                <i class="fas fa-coins fa-3x text-warning mb-3"></i>
-                <h5 class="card-title">金币支付</h5>
-                <p class="card-text text-muted">金币支付，安全便捷</p>
+    <div class="latest-movies">
+        <!-- 电影卡片 -->
+        <div class="movie-card">
+            <div class="movie-poster">
+                <img src="https://www.dmoe.cc/random.php" alt="电影海报">
+                <div class="play-button">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+            <div class="movie-overlay">
+                <h3 class="movie-title">沙丘2</h3>
+                <div class="movie-info">
+                    <div class="movie-rating">
+                        <i class="fas fa-star"></i>
+                        <span>8.5</span>
+                    </div>
+                    <span><i class="fas fa-clock me-1"></i>2h 46m</span>
+                    <span><i class="fas fa-calendar me-1"></i>2024</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 电影卡片 -->
+        <div class="movie-card">
+            <div class="movie-poster">
+                <img src="https://www.dmoe.cc/random.php" alt="电影海报">
+                <div class="play-button">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+            <div class="movie-overlay">
+                <h3 class="movie-title">奥本海默</h3>
+                <div class="movie-info">
+                    <div class="movie-rating">
+                        <i class="fas fa-star"></i>
+                        <span>8.7</span>
+                    </div>
+                    <span><i class="fas fa-clock me-1"></i>3h 26m</span>
+                    <span><i class="fas fa-calendar me-1"></i>2023</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 电影卡片 -->
+        <div class="movie-card">
+            <div class="movie-poster">
+                <img src="https://www.dmoe.cc/random.php" alt="电影海报">
+                <div class="play-button">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+            <div class="movie-overlay">
+                <h3 class="movie-title">芭比</h3>
+                <div class="movie-info">
+                    <div class="movie-rating">
+                        <i class="fas fa-star"></i>
+                        <span>7.8</span>
+                    </div>
+                    <span><i class="fas fa-clock me-1"></i>1h 54m</span>
+                    <span><i class="fas fa-calendar me-1"></i>2023</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 电影卡片 -->
+        <div class="movie-card">
+            <div class="movie-poster">
+                <img src="https://www.dmoe.cc/random.php" alt="电影海报">
+                <div class="play-button">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+            <div class="movie-overlay">
+                <h3 class="movie-title">蜘蛛侠：纵横宇宙</h3>
+                <div class="movie-info">
+                    <div class="movie-rating">
+                        <i class="fas fa-star"></i>
+                        <span>8.9</span>
+                    </div>
+                    <span><i class="fas fa-clock me-1"></i>2h 19m</span>
+                    <span><i class="fas fa-calendar me-1"></i>2023</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 电影卡片 -->
+        <div class="movie-card">
+            <div class="movie-poster">
+                <img src="https://www.dmoe.cc/random.php" alt="电影海报">
+                <div class="play-button">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+            <div class="movie-overlay">
+                <h3 class="movie-title">银河护卫队3</h3>
+                <div class="movie-info">
+                    <div class="movie-rating">
+                        <i class="fas fa-star"></i>
+                        <span>8.3</span>
+                    </div>
+                    <span><i class="fas fa-clock me-1"></i>2h 30m</span>
+                    <span><i class="fas fa-calendar me-1"></i>2023</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 电影卡片 -->
+        <div class="movie-card">
+            <div class="movie-poster">
+                <img src="https://www.dmoe.cc/random.php" alt="电影海报">
+                <div class="play-button">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+            <div class="movie-overlay">
+                <h3 class="movie-title">速度与激情10</h3>
+                <div class="movie-info">
+                    <div class="movie-rating">
+                        <i class="fas fa-star"></i>
+                        <span>7.5</span>
+                    </div>
+                    <span><i class="fas fa-clock me-1"></i>2h 21m</span>
+                    <span><i class="fas fa-calendar me-1"></i>2023</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 电影卡片 -->
+        <div class="movie-card">
+            <div class="movie-poster">
+                <img src="https://www.dmoe.cc/random.php" alt="电影海报">
+                <div class="play-button">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+            <div class="movie-overlay">
+                <h3 class="movie-title">碟中谍7</h3>
+                <div class="movie-info">
+                    <div class="movie-rating">
+                        <i class="fas fa-star"></i>
+                        <span>8.1</span>
+                    </div>
+                    <span><i class="fas fa-clock me-1"></i>2h 43m</span>
+                    <span><i class="fas fa-calendar me-1"></i>2023</span>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 
-<!-- 用户操作 -->
-<div class="row justify-content-center">
-    <div class="col-md-8">
-        <div class="card shadow border-0">
-            <div class="card-body text-center py-5">
-                {% if user.is_authenticated %}
-                    <h4 class="mb-4">
-                        <i class="fas fa-user-check text-success me-2"></i>欢迎回来，{{ user.username }}！
-                    </h4>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                        <a href="/movies/" class="btn btn-primary btn-lg">
-                            <i class="fas fa-film me-1"></i>浏览电影
-                        </a>
-                        <a href="{% url 'users:profile' %}" class="btn btn-outline-primary btn-lg">
-                            <i class="fas fa-user me-1"></i>个人中心
-                        </a>
-                    </div>
-                {% else %}
-                    <h4 class="mb-4">
-                        <i class="fas fa-user-plus text-primary me-2"></i>开始您的观影之旅
-                    </h4>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                        <a href="{% url 'users:register' %}" class="btn btn-primary btn-lg">
-                            <i class="fas fa-user-plus me-1"></i>立即注册
-                        </a>
-                        <a href="{% url 'users:login' %}" class="btn btn-outline-primary btn-lg">
-                            <i class="fas fa-sign-in-alt me-1"></i>立即登录
-                        </a>
-                    </div>
-                {% endif %}
-            </div>
-        </div>
+<!-- 分类导航 -->
+<section class="container py-5">
+    <h2 class="section-title">
+        <i class="fas fa-tags me-2"></i>电影分类
+    </h2>
+    
+    <div class="category-tabs">
+        <button class="category-tab active">全部</button>
+        <button class="category-tab">动作</button>
+        <button class="category-tab">喜剧</button>
+        <button class="category-tab">爱情</button>
+        <button class="category-tab">科幻</button>
+        <button class="category-tab">恐怖</button>
+        <button class="category-tab">悬疑</button>
+        <button class="category-tab">动画</button>
+        <button class="category-tab">纪录片</button>
+        <button class="category-tab">战争</button>
     </div>
-</div>
+</section>
+
+<!-- 页脚 -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-links">
+            <a href="#" class="footer-link">关于我们</a>
+            <a href="#" class="footer-link">使用条款</a>
+            <a href="#" class="footer-link">隐私政策</a>
+            <a href="#" class="footer-link">帮助中心</a>
+            <a href="#" class="footer-link">联系我们</a>
+        </div>
+        <p class="footer-copyright">
+            &copy; 2026 电影商城. All rights reserved.
+        </p>
+    </div>
+</footer>
 {% endblock %}
