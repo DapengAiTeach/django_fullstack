@@ -25,12 +25,6 @@ urlpatterns = [
     # 包含注册、登录、登出、个人信息等URL
     path('users/', include('apps.users.urls', namespace='users')),
 
-    # Django内置认证路由
-    # 包含登录、登出、密码重置等URL
-    # 默认模板位置：registration/login.html, registration/logout.html等
-    # 可通过settings.py中的LOGIN_URL、LOGOUT_REDIRECT_URL等配置自定义
-    path('', include('django.contrib.auth.urls')),
-
     # 后续会添加自定义应用的路由：
     # path('movies/', include('apps.movies.urls', namespace='movies')),    # 电影应用路由
     # path('orders/', include('apps.orders.urls', namespace='orders')),    # 订单应用路由

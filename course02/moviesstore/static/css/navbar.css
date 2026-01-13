@@ -7,6 +7,8 @@
     border-bottom: 1px solid var(--navbar-border);
     backdrop-filter: blur(10px);
     transition: background var(--transition-slow), border-color var(--transition-slow);
+    position: relative;
+    z-index: 1000;
 }
 
 .navbar-brand {
@@ -43,6 +45,7 @@
 .dropdown-menu {
     background: var(--secondary-dark);
     border: 1px solid var(--border-light);
+    z-index: 1050;
 }
 
 .dropdown-item {

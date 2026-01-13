@@ -51,6 +51,14 @@
                 <form method="post" class="auth-form-inner" id="loginForm">
                     {% csrf_token %}
                     
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.non_field_errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-icon">

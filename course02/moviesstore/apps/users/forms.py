@@ -124,35 +124,33 @@ class UserRegisterForm(BaseUserCreationForm):
         return password
 
 
-class UserLoginForm(forms.Form):
+class UserLoginForm(AuthenticationForm):
     """
     用户登录表单
     
-    用于用户登录，包含用户名和密码字段。
+    继承自Django的AuthenticationForm，用于用户登录。
     """
-    username = forms.CharField(
-        label='用户名',
-        widget=forms.TextInput(attrs={
-            'class': 'form-control',
-            'placeholder': ' '
-        })
-    )
-    password = forms.CharField(
-        label='密码',
-        widget=forms.PasswordInput(attrs={
-            'class': 'form-control',
-            'placeholder': ' '
-        })
-    )
-    
     def __init__(self, *args, **kwargs):
         """
         初始化表单
         
-        接受 request 参数以兼容 Django 的 LoginView。
+        为用户名和密码字段添加样式。
         """
-        request = kwargs.pop('request', None)
         super().__init__(*args, **kwargs)
+        
+        # 为用户名字段添加样式
+        self.fields['username'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': ' '
+        })
+        self.fields['username'].label = '用户名'
+        
+        # 为密码字段添加样式
+        self.fields['password'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': ' '
+        })
+        self.fields['password'].label = '密码'
 
 
 class UserProfileForm(forms.ModelForm):
