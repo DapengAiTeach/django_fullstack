@@ -1,0 +1,582 @@
+/* ===================================
+   认证页面样式 - 注册/登录
+   =================================== */
+
+.auth-container {
+    min-height: calc(100vh - 120px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-lg);
+}
+
+.auth-wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    min-height: 600px;
+    background: var(--secondary-dark);
+    border-radius: var(--radius-2xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+}
+
+/* ========== 品牌区 ========== */
+.auth-brand {
+    flex: 1;
+    position: relative;
+    background: var(--gradient-brand);
+    padding: var(--spacing-3xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+.brand-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    animation: fadeInUp 0.8s ease;
+}
+
+.brand-logo {
+    font-size: 80px;
+    margin-bottom: var(--spacing-lg);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.brand-title {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-md);
+    letter-spacing: 2px;
+}
+
+.brand-subtitle {
+    font-size: var(--font-size-lg);
+    opacity: 0.9;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.brand-features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md);
+    font-size: var(--font-size-base);
+    opacity: 0.9;
+    animation: slideIn 0.6s ease;
+}
+
+.feature-item:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.feature-item:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.feature-item:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.feature-item i {
+    font-size: 24px;
+}
+
+/* 装饰元素 */
+.brand-decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.decoration-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    animation: float 6s ease-in-out infinite;
+}
+
+.circle-1 {
+    width: 300px;
+    height: 300px;
+    top: -100px;
+    left: -100px;
+    animation-delay: 0s;
+}
+
+.circle-2 {
+    width: 200px;
+    height: 200px;
+    bottom: -50px;
+    right: -50px;
+    animation-delay: 2s;
+}
+
+.circle-3 {
+    width: 150px;
+    height: 150px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: 4s;
+}
+
+/* ========== 表单区 ========== */
+.auth-form {
+    flex: 1;
+    padding: var(--spacing-3xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--secondary-dark);
+}
+
+.form-container {
+    width: 100%;
+    max-width: 400px;
+    animation: fadeInRight 0.8s ease;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.form-title {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.form-subtitle {
+    font-size: var(--font-size-base);
+    color: var(--text-secondary);
+}
+
+.auth-form-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.form-group {
+    position: relative;
+}
+
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: var(--spacing-md);
+    color: var(--text-muted);
+    font-size: var(--font-size-lg);
+    transition: color var(--transition-base);
+    z-index: 1;
+}
+
+.form-control {
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-xl) var(--spacing-md) 50px;
+    background: var(--accent-dark);
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    color: var(--text-primary);
+    font-size: var(--font-size-base);
+    transition: all var(--transition-base);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--brand-primary);
+    background: var(--accent-light);
+    box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.1);
+}
+
+.form-control:focus ~ .input-icon {
+    color: var(--brand-primary);
+}
+
+.floating-label {
+    position: absolute;
+    left: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: var(--font-size-base);
+    pointer-events: none;
+    transition: all var(--transition-base);
+    background: transparent;
+    padding: 0 4px;
+    z-index: 2;
+}
+
+.input-group.focused .floating-label,
+.form-control:not(:placeholder-shown) ~ .floating-label {
+    top: -10px;
+    left: var(--spacing-md);
+    font-size: var(--font-size-xs);
+    color: var(--brand-primary);
+    background: var(--secondary-dark);
+    z-index: 3;
+    padding: 0 8px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: var(--spacing-md);
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: var(--font-size-base);
+    transition: color var(--transition-base);
+    z-index: 1;
+}
+
+.toggle-password:hover {
+    color: var(--brand-primary);
+}
+
+.help-text {
+    display: block;
+    margin-top: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
+}
+
+.error-message {
+    margin-top: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+    color: var(--error);
+    animation: shake 0.5s ease;
+}
+
+.form-check-group {
+    margin-top: var(--spacing-sm);
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox-input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkbox-custom {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    margin-right: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-base);
+    background: var(--accent-dark);
+}
+
+.checkbox-custom::after {
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 12px;
+    color: var(--text-primary);
+    opacity: 0;
+    transform: scale(0);
+    transition: all var(--transition-base);
+}
+
+.checkbox-input:checked ~ .checkbox-custom {
+    background: var(--brand-primary);
+    border-color: var(--brand-primary);
+}
+
+.checkbox-input:checked ~ .checkbox-custom::after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.checkbox-input:focus ~ .checkbox-custom {
+    border-color: var(--brand-primary);
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+}
+
+.checkbox-text {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    transition: color var(--transition-base);
+}
+
+.checkbox-label:hover .checkbox-text {
+    color: var(--text-primary);
+}
+
+.form-actions {
+    margin-top: var(--spacing-lg);
+}
+
+.btn-submit {
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-xl);
+    background: var(--gradient-brand);
+    border: none;
+    border-radius: var(--radius-lg);
+    color: var(--text-primary);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    box-shadow: var(--shadow-brand);
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(108, 92, 231, 0.4);
+}
+
+.btn-submit:active {
+    transform: translateY(0);
+}
+
+.btn-submit i {
+    transition: transform var(--transition-base);
+}
+
+.btn-submit:hover i {
+    transform: translateX(4px);
+}
+
+.form-footer {
+    margin-top: var(--spacing-xl);
+    text-align: center;
+}
+
+.footer-text {
+    font-size: var(--font-size-base);
+    color: var(--text-secondary);
+}
+
+.footer-link {
+    color: var(--brand-primary);
+    text-decoration: none;
+    font-weight: var(--font-weight-semibold);
+    transition: color var(--transition-base);
+}
+
+.footer-link:hover {
+    color: var(--brand-secondary);
+    text-decoration: underline;
+}
+
+/* ========== 动画 ========== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 0.9;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px);
+    }
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+/* ========== 响应式设计 ========== */
+@media (max-width: 992px) {
+    .auth-wrapper {
+        flex-direction: column;
+        min-height: auto;
+    }
+    
+    .auth-brand {
+        padding: var(--spacing-2xl);
+        min-height: 300px;
+    }
+    
+    .brand-logo {
+        font-size: 60px;
+    }
+    
+    .brand-title {
+        font-size: var(--font-size-3xl);
+    }
+    
+    .brand-features {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .auth-form {
+        padding: var(--spacing-2xl);
+    }
+}
+
+@media (max-width: 576px) {
+    .auth-container {
+        padding: var(--spacing-md);
+    }
+    
+    .auth-brand {
+        padding: var(--spacing-xl);
+        min-height: 250px;
+    }
+    
+    .brand-logo {
+        font-size: 50px;
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .brand-title {
+        font-size: var(--font-size-2xl);
+    }
+    
+    .brand-subtitle {
+        font-size: var(--font-size-sm);
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .brand-features {
+        gap: var(--spacing-md);
+    }
+    
+    .feature-item {
+        font-size: var(--font-size-sm);
+    }
+    
+    .feature-item i {
+        font-size: 20px;
+    }
+    
+    .auth-form {
+        padding: var(--spacing-xl);
+    }
+    
+    .form-container {
+        max-width: 100%;
+    }
+    
+    .form-title {
+        font-size: var(--font-size-2xl);
+    }
+    
+    .form-control {
+        padding: var(--spacing-sm) var(--spacing-lg) var(--spacing-sm) 45px;
+        font-size: var(--font-size-sm);
+    }
+    
+    .floating-label {
+        left: 45px;
+        font-size: var(--font-size-sm);
+    }
+    
+    .input-group.focused .floating-label,
+    .form-control:not(:placeholder-shown) ~ .floating-label {
+        left: var(--spacing-sm);
+        font-size: var(--font-size-xs);
+    }
+    
+    .btn-submit {
+        padding: var(--spacing-sm) var(--spacing-lg);
+        font-size: var(--font-size-base);
+    }
+}
+
+/* ========== 浅色主题适配 ========== */
+[data-theme="light"] .auth-wrapper {
+    background: var(--primary-dark);
+}
+
+[data-theme="light"] .auth-form {
+    background: var(--primary-dark);
+}
+
+[data-theme="light"] .floating-label {
+    background: var(--primary-dark);
+}
+
+[data-theme="light"] .input-group.focused .floating-label,
+[data-theme="light"] .form-control:not(:placeholder-shown) ~ .floating-label {
+    background: var(--primary-dark);
+}

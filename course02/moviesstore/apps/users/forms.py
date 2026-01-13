@@ -5,7 +5,7 @@
 """
 
 from django import forms
-from django.contrib.auth.forms import UserCreationForm as BaseUserCreationForm
+from django.contrib.auth.forms import UserCreationForm as BaseUserCreationForm, AuthenticationForm
 from django.core.exceptions import ValidationError
 from .models import User
 
@@ -27,7 +27,7 @@ class UserRegisterForm(BaseUserCreationForm):
         widgets = {
             'username': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': '请输入用户名'
+                'placeholder': ' '
             }),
         }
         labels = {
@@ -48,11 +48,11 @@ class UserRegisterForm(BaseUserCreationForm):
         # 为密码字段添加样式
         self.fields['password1'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': '请输入密码（至少8位）'
+            'placeholder': ' '
         })
         self.fields['password2'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': '请再次输入密码'
+            'placeholder': ' '
         })
         
         # 更新标签
@@ -122,6 +122,37 @@ class UserRegisterForm(BaseUserCreationForm):
             raise ValidationError('密码必须包含至少一个数字')
         
         return password
+
+
+class UserLoginForm(forms.Form):
+    """
+    用户登录表单
+    
+    用于用户登录，包含用户名和密码字段。
+    """
+    username = forms.CharField(
+        label='用户名',
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': ' '
+        })
+    )
+    password = forms.CharField(
+        label='密码',
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': ' '
+        })
+    )
+    
+    def __init__(self, *args, **kwargs):
+        """
+        初始化表单
+        
+        接受 request 参数以兼容 Django 的 LoginView。
+        """
+        request = kwargs.pop('request', None)
+        super().__init__(*args, **kwargs)
 
 
 class UserProfileForm(forms.ModelForm):

@@ -12,7 +12,7 @@ from django.contrib import messages
 from django.urls import reverse, reverse_lazy
 from django.db import transaction
 
-from .forms import UserRegisterForm, UserProfileForm
+from .forms import UserRegisterForm, UserProfileForm, UserLoginForm
 from .models import User
 
 
@@ -84,6 +84,7 @@ class LoginView(BaseLoginView):
     
     template_name = 'users/login.html'  # 指定登录页面模板
     redirect_authenticated_user = True  # 已登录用户重定向到首页
+    authentication_form = UserLoginForm  # 使用自定义的登录表单
     
     def get_success_url(self):
         """

@@ -1,71 +1,126 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}用户注册 - 电影商城{% endblock %}
 
+{% block extra_css %}
+<link href="{% static 'css/auth.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-6 col-lg-5">
-        <div class="card shadow">
-            <div class="card-header bg-primary text-white">
-                <h4 class="mb-0 text-center">
-                    <i class="fas fa-user-plus me-2"></i>用户注册
-                </h4>
+<div class="auth-container">
+    <div class="auth-wrapper">
+        <div class="auth-brand">
+            <div class="brand-content">
+                <div class="brand-logo">
+                    <i class="fas fa-film"></i>
+                </div>
+                <h1 class="brand-title">电影商城</h1>
+                <p class="brand-subtitle">发现精彩电影，享受观影乐趣</p>
+                
+                <div class="brand-features">
+                    <div class="feature-item">
+                        <i class="fas fa-play-circle"></i>
+                        <span>海量高清电影</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-star"></i>
+                        <span>精选优质内容</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-bolt"></i>
+                        <span>极速播放体验</span>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <form method="post" enctype="multipart/form-data">
+            
+            <div class="brand-decoration">
+                <div class="decoration-circle circle-1"></div>
+                <div class="decoration-circle circle-2"></div>
+                <div class="decoration-circle circle-3"></div>
+            </div>
+        </div>
+        
+        <div class="auth-form">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2 class="form-title">创建账号</h2>
+                    <p class="form-subtitle">加入我们，开启电影之旅</p>
+                </div>
+                
+                <form method="post" enctype="multipart/form-data" class="auth-form-inner" id="registerForm">
                     {% csrf_token %}
                     
-                    <!-- 用户名 -->
-                    <div class="mb-3">
-                        <label for="{{ form.username.id_for_label }}" class="form-label">
-                            <i class="fas fa-user me-1"></i>{{ form.username.label }}
-                        </label>
-                        {{ form.username }}
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-icon">
+                                <i class="fas fa-user"></i>
+                            </span>
+                            {{ form.username }}
+                            <label for="{{ form.username.id_for_label }}" class="floating-label">
+                                {{ form.username.label }}
+                            </label>
+                        </div>
                         {% if form.username.help_text %}
-                            <small class="form-text text-muted">{{ form.username.help_text }}</small>
+                            <small class="help-text">{{ form.username.help_text }}</small>
                         {% endif %}
                         {% for error in form.username.errors %}
-                            <div class="invalid-feedback d-block">{{ error }}</div>
+                            <div class="error-message">{{ error }}</div>
                         {% endfor %}
                     </div>
                     
-                    <!-- 密码 -->
-                    <div class="mb-3">
-                        <label for="{{ form.password1.id_for_label }}" class="form-label">
-                            <i class="fas fa-lock me-1"></i>{{ form.password1.label }}
-                        </label>
-                        {{ form.password1 }}
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-icon">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                            {{ form.password1 }}
+                            <label for="{{ form.password1.id_for_label }}" class="floating-label">
+                                {{ form.password1.label }}
+                            </label>
+                            <button type="button" class="toggle-password" data-target="{{ form.password1.id_for_label }}">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
                         {% if form.password1.help_text %}
-                            <small class="form-text text-muted">{{ form.password1.help_text }}</small>
+                            <small class="help-text">{{ form.password1.help_text }}</small>
                         {% endif %}
                         {% for error in form.password1.errors %}
-                            <div class="invalid-feedback d-block">{{ error }}</div>
+                            <div class="error-message">{{ error }}</div>
                         {% endfor %}
                     </div>
                     
-                    <!-- 确认密码 -->
-                    <div class="mb-3">
-                        <label for="{{ form.password2.id_for_label }}" class="form-label">
-                            <i class="fas fa-lock me-1"></i>{{ form.password2.label }}
-                        </label>
-                        {{ form.password2 }}
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-icon">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                            {{ form.password2 }}
+                            <label for="{{ form.password2.id_for_label }}" class="floating-label">
+                                {{ form.password2.label }}
+                            </label>
+                            <button type="button" class="toggle-password" data-target="{{ form.password2.id_for_label }}">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
                         {% for error in form.password2.errors %}
-                            <div class="invalid-feedback d-block">{{ error }}</div>
+                            <div class="error-message">{{ error }}</div>
                         {% endfor %}
                     </div>
                     
-                    <!-- 提交按钮 -->
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-user-plus me-1"></i>注册
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">
+                            <span class="btn-text">注册</span>
+                            <i class="fas fa-arrow-right"></i>
                         </button>
                     </div>
                 </form>
                 
-                <!-- 登录链接 -->
-                <div class="text-center mt-3">
-                    <span>已有账号？</span>
-                    <a href="{% url 'users:login' %}" class="text-decoration-none">立即登录</a>
+                <div class="form-footer">
+                    <p class="footer-text">
+                        已有账号？
+                        <a href="{% url 'users:login' %}" class="footer-link">立即登录</a>
+                    </p>
                 </div>
             </div>
         </div>
@@ -73,14 +128,45 @@
 </div>
 {% endblock %}
 
-{% block extra_css %}
-<style>
-    .card {
-        border: none;
-        border-radius: 10px;
-    }
-    .card-header {
-        border-radius: 10px 10px 0 0 !important;
-    }
-</style>
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const passwordToggles = document.querySelectorAll('.toggle-password');
+    
+    passwordToggles.forEach(toggle => {
+        toggle.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-target');
+            const input = document.getElementById(targetId);
+            const icon = this.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+    });
+    
+    const inputs = document.querySelectorAll('.form-control');
+    inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            this.parentElement.classList.add('focused');
+        });
+        
+        input.addEventListener('blur', function() {
+            if (!this.value) {
+                this.parentElement.classList.remove('focused');
+            }
+        });
+        
+        if (input.value) {
+            input.parentElement.classList.add('focused');
+        }
+    });
+});
+</script>
 {% endblock %}
