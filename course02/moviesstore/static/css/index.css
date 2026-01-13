@@ -12,9 +12,9 @@ body {
 
 /* ========== 导航栏 ========== */
 .navbar {
-    background: rgba(15, 16, 20, 0.95);
+    background: var(--navbar-bg);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--navbar-border);
     box-shadow: var(--shadow-md);
     padding: var(--spacing-md) 0;
 }
