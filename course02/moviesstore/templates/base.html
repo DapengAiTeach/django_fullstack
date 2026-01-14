@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}电影商城{% endblock %}</title>
+</head>
+<body>
+    <!-- 头部开始 -->
+     <header>
+        <h1>电影商城</h1>
+        <hr>
+     </header>
+    <!-- 头部结束 -->
+
+    <!-- 内容开始 -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <!-- 内容结束 -->
+
+     <!-- 底部开始 -->
+     <footer>
+        <hr>
+        <p>copyright &copy; 2026 大鹏AI教育</p>
+     </footer>
+     <!-- 底部结束 -->
+</body>
+</html>

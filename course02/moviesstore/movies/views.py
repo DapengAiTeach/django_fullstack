@@ -1,8 +1,5 @@
 from django.shortcuts import render
 
-# 导入响应对象
-from django.http import HttpResponse
-
 # 定义视图函数
 def movie_list(request):
     """
@@ -10,5 +7,5 @@ def movie_list(request):
     :param request: 请求对象
     :return: 响应对象
     """
-    # 返回响应对象
-    return HttpResponse("电影列表")
+    # 返回渲染页面
+    return render(request, 'movies/movie_list.html')
